@@ -1,0 +1,112 @@
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100px;
+    margin: 0;
+    margin-bottom: 2.5rem;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    // background-color: #007A78;
+    border-bottom: 1px solid #dee2e6 !important;
+    box-sizing: border-box;
+    a {
+        text-decoration: none;
+    }
+}
+.title {
+    display: flex !important;
+    color:  #343a40;
+    padding-top: 0;
+    padding-left: 5%;
+    margin-bottom: 2;
+    font-weight: 700;
+    font-size: 2.5em;
+}
+.title:hover {
+    cursor: pointer;
+    color: #000;
+}
+.title-sub {
+    font-size: 0.5em;
+    margin: auto;
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+.navbar-list {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    margin: auto;
+    // padding-left: 20%;
+    list-style: none;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    min-width: 600px;   //w celach wygladowych
+}
+.link {
+    cursor: pointer;
+    height: 30px;
+    line-height: 30px;
+    color: #007bff;
+    font-weight: 500;
+    font-size: 1rem;
+    margin: 10px;
+}
+.link:hover {
+    color: #003e80;
+}
+
+form {
+    display: flex;
+    margin-left:0;
+    margin-right: 2%;
+    height: 35px;
+    .form-control {
+        margin-right: 10px;
+        padding: 0;
+        padding-left: 10px;
+        height: 100%;
+        font-size: 1em;
+        border-radius: 4px;
+    }
+}
+
+.log {
+    height: 100%;
+    margin-right: 10px;
+    padding: 0;
+    border-color: #007bff;
+    .btnText {
+        text-align: center;
+        vertical-align: middle;
+        font-size: 1rem;
+        font-weight: 400;
+        color: #007bff;
+        // color: #FFC745;
+    }
+}
+.log:hover {
+    background-color: #007bff;
+    .btnText {
+        color: #fff;
+    }
+}
+.register {
+    min-width: 80px;
+    padding: 0;
+    background-color: rgba(0, 123, 255, 0.9);
+    .btnText {
+        color: #fff;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 1rem;
+        font-weight: 400;
+    }
+}
+.register:hover {
+    background-color: rgba(0, 123, 255, 1);
+}

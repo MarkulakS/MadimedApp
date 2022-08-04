@@ -1,0 +1,42 @@
+<nav>
+    <div class="main">
+        <a class="title">MADIMED<span class="title-sub">Clinic</span></a>
+
+        <ul class="navbar-list" *ngIf="accountService.currentUser$ | async">
+            <li class="item">
+                <a class="link" href="#">Home</a>
+            </li>
+            <li class="item">
+                <a class="link" href="#">Lists</a>
+            </li>
+            <li class="item">
+                <a class="link" href="#">Info</a>
+            </li>
+            <li class="item">
+                <a class="link" (click)="logout()">Logout</a>
+            </li>
+        </ul>
+
+        <form *ngIf="(accountService.currentUser$ | async) == null" #loginForm="ngForm" class="nav-form" (ngSubmit)="login()" autocomplete="off">
+            <input 
+                name="username"
+                [(ngModel)]="model.username"
+                type="text" 
+                class="form-control" 
+                placeholder="Username">
+            <input 
+                name="password"
+                [(ngModel)]="model.password"
+                type="password" 
+                class="form-control" 
+                placeholder="Password">
+            <button type="submit" class="log" mat-stroked-button>
+                <span class="btnText">Login</span>
+            </button>
+            <button type="button" class="register" mat-stroked-button>
+                <span class="btnText">Sign-up</span>
+            </button>
+        </form>
+
+    </div> 
+</nav>
