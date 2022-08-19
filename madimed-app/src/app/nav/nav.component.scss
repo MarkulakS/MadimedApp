@@ -1,7 +1,6 @@
 .main {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     width: 100%;
     height: 100px;
     margin: 0;
@@ -19,7 +18,7 @@
     display: flex !important;
     color:  #343a40;
     padding-top: 0;
-    padding-left: 5%;
+    margin-left: 5%;
     margin-bottom: 2;
     font-weight: 700;
     font-size: 2.5em;
@@ -38,14 +37,14 @@
 .navbar-list {
     display: flex;
     align-items: center;
-    justify-self: center;
+    justify-content: center;
     margin: auto;
-    // padding-left: 20%;
+    padding: 0;
+    padding-right: 8%;
     list-style: none;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    min-width: 600px;   //w celach wygladowych
 }
 .link {
     cursor: pointer;
@@ -58,6 +57,73 @@
 }
 .link:hover {
     color: #003e80;
+}
+
+.dropdown {
+    display: flex;
+    margin-right: 5%;
+    ol {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        color:#343a40;
+        background-color: transparent;
+      }
+
+      /* wygląd wszystkich elementów - a - znajdujących się w elemencie - ol */
+      ol a {
+        display: block;
+        text-decoration: none;
+        color:#343a40;
+        padding: 0 5px;
+        cursor: pointer;
+      }
+
+      ol a:hover {
+        color: #000;
+      }
+
+      /* wygląd elementów - li - wszystkich dzieci elementu - ol */
+      ol > li {
+        float: left;
+        width: 125px;
+        margin-left: 1px;
+        background-color: #fff;
+        color: #000;
+        height: 2em;
+      }
+
+      ol > li:hover > ul {
+        display:block;
+        cursor: pointer;
+        margin-top: 5px;
+      }
+
+      ol > li > ul {
+        display:none;
+        list-style-type:none;
+        padding: 0;
+        margin: 0;
+        border:1px solid #9e9e9e;
+        border-radius: 5px;
+      }
+      ol > li > ul > li {
+        position:relative;
+        padding-left: 5px;
+        margin-top: 7px;
+        margin-bottom: 7px;
+        background-color: #fff;
+      }
+
+      ol > li > ul > li:hover {
+        background-color: #dee2e6;
+      }
+
+      /* wygląd elementu - a - w części rozwijanej */
+      ol > li > ul > li > a {
+        // border-radius: 5px;
+        // border:1px solid #9e9e9e;
+      }
 }
 
 form {

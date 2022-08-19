@@ -1,23 +1,35 @@
 <nav>
     <div class="main">
-        <a class="title">MADIMED<span class="title-sub">Clinic</span></a>
+        <a class="title" routerLink="/" routerLinkActive='active'>MADIMED<span class="title-sub">Clinic</span></a>
 
-        <ul class="navbar-list" *ngIf="accountService.currentUser$ | async">
-            <li class="item">
-                <a class="link" href="#">Home</a>
-            </li>
-            <li class="item">
-                <a class="link" href="#">Lists</a>
-            </li>
-            <li class="item">
-                <a class="link" href="#">Info</a>
-            </li>
-            <li class="item">
-                <a class="link" (click)="logout()">Logout</a>
-            </li>
+        <ul class="navbar-list">
+            <ng-container *ngIf="accountService.currentUser$ | async">
+                <li class="item">
+                    <a class="link" routerLink="/" routerLinkActive='active'>Home</a>
+                </li>
+                <li class="item">
+                    <a class="link" routerLink="/members" routerLinkActive='active'>Lists</a>
+                </li>
+                <li class="item">
+                    <a class="link" routerLink="/lists"routerLinkActive='active'>Info</a>
+                </li>
+            </ng-container>
         </ul>
 
-        <form *ngIf="(accountService.currentUser$ | async) == null" #loginForm="ngForm" class="nav-form" (ngSubmit)="login()" autocomplete="off">
+        <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user">
+                <ol>
+                    <li>
+                        <a>Welcome {{user.username | titlecase}}</a>
+                    <ul>
+                      <li><a>Edit Profile</a></li>
+                      <li><a (click)="logout()">Logout</a></li>
+                    </ul>
+                  </li>
+                </ol>
+        </div>
+
+        <form *ngIf="(accountService.currentUser$ | async) == null" #loginForm="ngForm" class="nav-form" 
+            (ngSubmit)="login()" autocomplete="off">
             <input 
                 name="username"
                 [(ngModel)]="model.username"
