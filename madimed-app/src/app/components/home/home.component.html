@@ -1,11 +1,56 @@
-<div class="container mt-5">
-    <div *ngIf="!-registerMode" style="text-align: center;">
-        <h1>Zobacz co u nas ciekawego</h1>
-        <div class="text-center">
-            <button (click)="registerToggle()" class="btn btn-primary btn-lg mr-2">Register</button>
-            <button class="btn btn-primary btn-lg">Learn more</button>
+<div class="main" *ngIf="!registerMode">
+    <div class="panel-1">
+        <img src="./assets/background_main.jpg">
+        <div class="tiles">
+            <div class="tiles-tile tile-one">
+                <!-- <img src="./assets/Images/tiles-stetoskop2.png" width="5px" height="10px"> -->
+                <div class="tiles-text">
+                    <h4>Open<span class="letter">H</span><span>ours</span></h4>
+                    <p class="tex">Monday - Friday<span>7:00 - 6:00 pm</span></p>
+                    <p class="tex">Saturday<span>7:00 - 3:00 pm</span></p>
+                    <p class="tex">Sunday<span>Close</span></p>
+                    <span class="drop-number">01</span>
+                </div>
+            </div>
+            <div class="tiles-tile tile-two">
+                <div class="tiles-text">
+                    <h4>Emergency<span class="letter">C</span><span>ases</span></h4>
+                    <p class="tex">In case of emergency, please call a friendly medical clinic :</p>
+                    <mat-icon>phone</mat-icon><span class="tel-number">0102030405</span>
+                    <span class="drop-number">02</span>
+                </div>
+            </div>
+            <div class="tiles-tile tile-three">
+                <div class="tiles-text">
+                    <h4>You dont have an account yet?</h4>
+                    <h4>Join<span class="letter">U</span><span>s</span></h4>
+                    <button (click)="registerToggle()" class="btn btn-primary btn-lg">Register</button>
+                    <span class="drop-number">03</span>
+                </div>
+            </div>
         </div>
     </div>
+    <div class="panel-2">
+        <hr>
+        <div class="tile">
+            <div class="tile-text">
+                <h1>We strive to Provide You & Your Family with the best 
+                    Medical and General Practice Care</h1>
+                <h6>We provide all aspects od medical practice for your whole 
+                    family inculding general check-ups 
+                    or assisting you with specific injuries</h6>
+                <p>We will work with you </p>
+            </div>
+            <div class="tile-image">
+                <img src="./assets/Images/tile-image.png">
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="panel-3">
+        <h1>Contact</h1>
+    </div>
+</div>
 
     <div *ngIf="registerMode" class="container">
         <div class="row justify-content-center">
@@ -14,4 +59,3 @@
             </div>
         </div>
     </div>
-</div>

@@ -14,9 +14,10 @@
                     <a class="link" routerLink="/lists" routerLinkActive='active'>Info</a>
                 </li>
             </ng-container>
-                <li class="item">
+            <!-- Link to test errors -->
+                <!-- <li class="item">
                     <a class="link" routerLink="/errors" routerLinkActive='active'>Errors</a>
-                </li>
+                </li> -->
         </ul>
 
         <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user">
@@ -38,7 +39,7 @@
                 [(ngModel)]="model.username"
                 type="text" 
                 class="form-control" 
-                placeholder="Username">
+                placeholder="Pesel">
             <input 
                 name="password"
                 [(ngModel)]="model.password"
