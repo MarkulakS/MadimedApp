@@ -30,9 +30,9 @@ namespace API.Data
             return await _context.Users.FindAsync(id);
         }
 
-        public async Task<AppUser> GetUserByUsernameAsync(string username)
+        public async Task<AppUser> GetUserByUsernameAsync(string pesel)
         {
-            return await _context.Users.SingleOrDefaultAsync(x => x.UserName == username);
+            return await _context.Users.SingleOrDefaultAsync(x => x.Pesel == pesel);
         }
 
         public async Task<bool> SaveAllAsync()
@@ -52,10 +52,10 @@ namespace API.Data
                 .ToListAsync();
         }
 
-        public async Task<MemberDto> GetMemberAsync(string username)
+        public async Task<MemberDto> GetMemberAsync(string pesel)
         {
             return await _context.Users
-                .Where(x => x.UserName == username)
+                .Where(x => x.Pesel == pesel)
                 .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();
         }

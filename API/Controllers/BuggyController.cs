@@ -20,7 +20,8 @@ namespace API.Controllers
         [Authorize]
         [HttpGet("auth")]
         public ActionResult<string> GetSecret() {
-            return "secret text";
+            // return "secret text";
+            return BadRequest("This was problem with authorize");
         }
 
         [HttpGet("not-found")]

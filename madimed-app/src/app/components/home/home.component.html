@@ -1,9 +1,8 @@
 <div class="main" *ngIf="!registerMode">
-    <div class="panel-1">
+    <div class="panel-1" id="home">
         <img src="./assets/background_main.jpg">
         <div class="tiles">
             <div class="tiles-tile tile-one">
-                <!-- <img src="./assets/Images/tiles-stetoskop2.png" width="5px" height="10px"> -->
                 <div class="tiles-text">
                     <h4>Open<span class="letter">H</span><span>ours</span></h4>
                     <p class="tex">Monday - Friday<span>7:00 - 6:00 pm</span></p>
@@ -21,17 +20,22 @@
                 </div>
             </div>
             <div class="tiles-tile tile-three">
-                <div class="tiles-text">
+                <div *ngIf="!(accountService.currentUser$ | async)" class="tiles-text">
                     <h4>You dont have an account yet?</h4>
-                    <h4>Join<span class="letter">U</span><span>s</span></h4>
-                    <button (click)="registerToggle()" class="btn btn-primary btn-lg">Register</button>
+                    <button (click)="registerToggle()" class="btn btn-primary btn-lg">Register Now</button>
+                    <span class="drop-number">03</span>
+                </div>
+                <div *ngIf="accountService.currentUser$ | async" class="tiles-text">
+                    <h4>Have you registered already?</h4>
+                    <p>Go check your <a class="link-href">history</a></p>
+                    <p>Or you need sign to <a class="link-href">visit</a></p>
                     <span class="drop-number">03</span>
                 </div>
             </div>
         </div>
     </div>
+    <hr>
     <div class="panel-2">
-        <hr>
         <div class="tile">
             <div class="tile-text">
                 <h1>We strive to Provide You & Your Family with the best 
@@ -45,17 +49,32 @@
                 <img src="./assets/Images/tile-image.png">
             </div>
         </div>
-        <hr>
     </div>
-    <div class="panel-3">
-        <h1>Contact</h1>
-    </div>
-</div>
-
-    <div *ngIf="registerMode" class="container">
-        <div class="row justify-content-center">
-            <div class="d-flex">
-                <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
+    <hr>
+    <div class="panel-3" id="contact">
+        <div class="grid-container">
+            <div class="title-con">
+            <h1>Contact</h1>
+            </div>
+            <div class="left-panel">
+                <h4>Address: </h4>
+                <h4 style="opacity: 0">.</h4>
+                <h4>Telephone: </h4>
+            </div>
+            <div class="right-panel">
+                <p>Mandel Street</p>
+                <p>45-700 Opole</p>
+                <p>00 47 821 234</p>
+            </div>
+            <div class="footer-panel">
+                <h3>Footer</h3>
             </div>
         </div>
     </div>
+</div>
+
+
+<!-- register Form -->
+<div *ngIf="registerMode" class="registerM">
+    <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
+</div>

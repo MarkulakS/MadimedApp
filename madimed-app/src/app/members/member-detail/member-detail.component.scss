@@ -1,0 +1,21 @@
+.list-detail {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-bottom: 1px solid lightgray;
+
+    .details {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        margin-left: 10px;
+            p, button {
+                width: 150px;
+                margin-bottom: 0;
+            }
+    }
+}

@@ -1,0 +1,11 @@
+<div class="list-detail">
+        <div class="details">
+                <p style="width: 100px;">{{member.id}}</p>
+                <p>{{member.pesel}}</p>
+                <p>{{member.firstName}}</p>
+                <p>{{member.lastName}}</p>
+                <button type="button" routerLink="/members/{{member.pesel}}" mat-stroked-button>
+                        <span>Info about member</span>
+                </button>
+        </div> 
+</div>

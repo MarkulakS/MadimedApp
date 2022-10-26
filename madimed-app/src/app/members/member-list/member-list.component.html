@@ -1,0 +1,14 @@
+<div class="main">
+    <div class="list-detail">
+        <div class="list-header">
+            <h6 style="width: 100px">Number</h6>
+            <h6>Pesel</h6>
+            <h6>First Name</h6>
+            <h6>Last Name</h6>
+            <h6 style="text-align: center">Details</h6>
+        </div>
+        <div class="details" *ngFor="let member of members">
+            <app-member-detail class="member-details" [member]="member"></app-member-detail>
+        </div>
+    </div>
+</div>

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCheckboxModule } from '@angular/material/checkbox'; 
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 @NgModule({
   declarations: [],
@@ -10,14 +12,18 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     CommonModule,
     MatButtonModule,
     MatFormFieldModule,
+    MatCheckboxModule,
     ToastrModule.forRoot({
       positionClass: 'toastr-bottom-right'
-    })
+    }),
+    TabsModule.forRoot()
   ],
   exports: [
     MatButtonModule,
     MatFormFieldModule,
-    ToastrModule
+    MatCheckboxModule,
+    ToastrModule,
+    TabsModule,
   ]
 })
 export class SharedModule { }

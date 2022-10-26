@@ -1,0 +1,33 @@
+.cont {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 50px;
+    margin-left: 100px;
+
+    .card-title {
+        display: flex;
+        width: 40%;
+    
+    }
+    .infos {
+        min-width: 400px;
+        width: 100%;
+        margin-bottom: 5%;
+        .member-tabset {
+            margin-top: 10px;
+
+            h2 {
+                margin-top: 20px;
+            }
+            h4 {
+                margin-left: 50px;
+                font-weight: 300;
+            }
+            span {
+                font-size: 1.1rem;
+            }
+        }
+    }
+}

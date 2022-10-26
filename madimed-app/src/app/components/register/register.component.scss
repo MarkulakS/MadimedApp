@@ -1,5 +1,180 @@
-.form-group {
+form {
     display: flex;
-    text-align: center;
     justify-content: center;
+    width: 60%;
+    min-width: 415px;
+    min-height: 575px;
+    margin: auto;
+    margin-top: 10px;
+    background-color: #fff;
+}
+form .form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 95%;
+    height: 85%;   
+    margin: auto;
+    margin-top: 25px;
+    padding-top: 25px;
+    box-shadow: 0 0 0.5em;
+    transition: 0.3 ease;
+}
+.second {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.user-details {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50%;
+    .chcBox {
+        width: 100%;
+        margin-left: 30px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        transition: 0.7 ease;
+        span{
+            margin-left: 10px;
+        }
+        .mat-checkbox{
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+        }
+    }
+    .chcInfo {
+        width: 100%;
+        margin-top: -10px;
+        margin-left: 25px;
+        opacity: 0.6;
+        font-size: 0.8em;
+    }
+}
+
+.header {
+    position: relative;
+    display: flex;
+    width: 100%;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-left: 10px;
+    margin-bottom: 30px;
+}
+.header::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 3px;
+    width: 35px;
+    background-color: #3f5efb;
+}
+
+.form-inputs {
+    display: flex;
+    width: calc(100% / 2 - 30px);
+    flex-direction: column;
+    margin: 4px 5px;
+}
+.form-inputs label {
+    font-size: 15px;
+    font-weight: 500;
+    color: #2e2e2e;
+}
+.form-inputs input{
+    outline: none;
+    font-family: sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    border: 1px solid #aaa;
+    padding: 0 15px;
+    height: 42px;
+    margin: 8px 0;
+}
+.form-inputs input:is(:focus, :valid){
+    box-shadow: 0 3px 6px rgba(0,0,0,0.13);
+}
+.form-inputs input[type="date"]{
+    color: #707070;
+}
+.form-inputs input[type="date"]:valid {
+    color: #333;
+}
+
+//hidden input about other clinic
+.clinic {
+    width: 100%;
+    margin-left: 25px;
+    input {
+        width: 60%;
+    }
+}
+
+.form-buttons {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin: 25px auto;
+    button {
+        width: 130px;
+    }
+    .rightBtn {
+        margin-right: 0;
+    }
+}
+
+.leftBtn {
+    margin-right: 14px;
+    padding: 0;
+    border-color: #007bff;
+    .btnText {
+        text-align: center;
+        vertical-align: middle;
+        font-size: 1rem;
+        font-weight: 400;
+        color: #007bff;
+    }
+}
+.leftBtn:hover {
+    background-color: #007bff;
+    .btnText {
+        color: #fff;
+    }
+}
+.rightBtn {
+    // min-width: 80px;
+    padding: 0;
+    margin: auto;
+    margin-right: 0;
+    background-color: rgba(0, 123, 255, 0.9);
+    .btnText {
+        color: #fff;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 1rem;
+        font-weight: 400;
+    }
+}
+.rightBtn:hover {
+    background-color: rgba(0, 123, 255, 1);
+}
+
+// css for checkbox
+::ng-deep .mat-checkbox-checked.mat-accent {
+    .mat-checkbox-ripple .mat-ripple-element {
+        background-color: #3f5efb !important;
+    }
+
+    .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+        background-color: #818bff;
+     }
+}
+::ng-deep .mat-checkbox-frame {
+    border-color: #333;
 }

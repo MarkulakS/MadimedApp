@@ -32,9 +32,9 @@ namespace API.Controllers
             return Ok(users);
         }
 
-        [HttpGet("{username}")]
-        public async Task<ActionResult<MemberDto>> GetUser(string username){
-            return await _userRepository.GetMemberAsync(username);
+        [HttpGet("{pesel}")]
+        public async Task<ActionResult<MemberDto>> GetUser(string pesel){
+            return await _userRepository.GetMemberAsync(pesel);
         }
     }
 }

@@ -27,21 +27,31 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto) {
 
-            if (await UserExists(registerDto.Username)) return BadRequest("Username is taken!");
+            if (await UserExists(registerDto.Pesel)) return BadRequest("Pesel is taken!");
 
             using var hmac = new HMACSHA512();
             
             var user = new AppUser{
-                UserName = registerDto.Username.ToLower(),
+                // Pesel = registerDto.Pesel.ToLower(),
+                Pesel = registerDto.Pesel,
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-                PasswordSalt = hmac.Key
+                PasswordSalt = hmac.Key,
+                FirstName = registerDto.FirstName,
+                LastName = registerDto.LastName,
+                DateOfBirth = registerDto.DateOfBirth,
+                Phone = registerDto.Phone,
+                Email = registerDto.Email,
+                Street = registerDto.Street,
+                Town = registerDto.Town,
+                Code = registerDto.Code,
+                LastClinic = registerDto.LastClinic
             };
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
             return new UserDto {
-                Username = user.UserName,
+                Pesel = user.Pesel,
                 Token = tokenService.CreateToken(user)
             };
         }
@@ -49,9 +59,9 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto) {
 
-            var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == loginDto.Username);
+            var user = await _context.Users.SingleOrDefaultAsync(x => x.Pesel == loginDto.Pesel);
 
-            if(user == null) return Unauthorized("Invalid username");
+            if(user == null) return Unauthorized("Invalid pesel");
 
             using var hmac = new HMACSHA512(user.PasswordSalt);
 
@@ -63,13 +73,15 @@ namespace API.Controllers
             }
 
             return new UserDto {
-                Username = user.UserName,
+                Pesel = user.Pesel,
                 Token = tokenService.CreateToken(user)
             };
         }
 
-        private async Task<bool> UserExists(string username) {
-            return await _context.Users.AnyAsync(x => x.UserName == username.ToLower());
+        private async Task<bool> UserExists(string pesel) {
+            return await _context.Users.AnyAsync(x => x.Pesel == pesel);
+            // return await _context.Users.AnyAsync(x => x.Pesel == pesel.ToLower());
+
         }
     }
 }

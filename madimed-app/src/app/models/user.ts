@@ -1,4 +1,6 @@
 export interface User {
-    username: string;
+    pesel: string;
+    firstName: string
+    lastName: string
     token: string;
 }

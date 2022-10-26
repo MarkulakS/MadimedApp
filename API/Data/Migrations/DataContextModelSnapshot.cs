@@ -22,19 +22,22 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("City")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("Created")
+                    b.Property<string>("Code")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Gender")
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastClinic")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("PasswordHash")
@@ -43,7 +46,16 @@ namespace API.Data.Migrations
                     b.Property<byte[]>("PasswordSalt")
                         .HasColumnType("BLOB");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("Pesel")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Town")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

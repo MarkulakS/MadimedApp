@@ -6,8 +6,8 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ListsComponent } from './lists/lists.component';
-import { MemeberDetailComponent } from './members/memeber-detail/memeber-detail.component';
-import { MemeberListComponent } from './members/memeber-list/memeber-list.component';
+import { MemberCardComponent } from './members/member-card/member-card.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent },
@@ -16,8 +16,8 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
-      {path: 'members', component: MemeberListComponent, canActivate: [AuthGuard] },
-      {path: 'members/:id', component: MemeberDetailComponent },
+      {path: 'members', component: MemberListComponent, canActivate: [AuthGuard] },
+      {path: 'members/:pesel', component: MemberCardComponent },
       {path: 'lists', component: ListsComponent },
     ]
   },
