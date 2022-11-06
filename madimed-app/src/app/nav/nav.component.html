@@ -23,19 +23,21 @@
                 </li> -->
         </ul>
 
-        <div class="dropdown navbar-full" *ngIf="(accountService.currentUser$ | async) as user">
-            <ol>
-                <li>
-                    <!-- <a>Welcome {{user.firstName | titlecase}}</a> -->
-                    <a>Welcome</a>
-                    <ul>
-                        <li><a>Edit Profile</a></li>
-                        <hr>
-                        <li><a (click)="logout()">Logout</a></li>
-                    </ul>
-                </li>
-            </ol>
-        </div>
+        <ng-container *ngIf="member">
+            <div class="dropdown navbar-full" *ngIf="(accountService.currentUser$ | async) as user">
+                <ol>
+                    <li>
+                        <!-- <a>Welcome {{member.firstName}}</a> -->
+                        <a>Welcome</a>
+                        <ul>
+                            <li><a routerLink="/member/edit">Edit Profile</a></li>
+                            <hr>
+                            <li><a (click)="logout()">Logout</a></li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </ng-container>
 
         <form *ngIf="(accountService.currentUser$ | async) == null" #loginForm="ngForm" class="nav-form navbar-full"
             (ngSubmit)="login()" autocomplete="off">
@@ -64,7 +66,7 @@
                     <li><a routerLink="/lists">Info</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <li><a routerLink="/login-mobile">Login</a></li>
-                    <li><a>Register</a></li>
+                    <li><a >Register</a></li>
                 </ul>
                 <!-- <button mat-icon-button>
                 <mat-icon>menu</mat-icon>

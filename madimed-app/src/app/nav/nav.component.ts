@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { take } from 'rxjs/operators';
+import { Member } from '../models/members';
+import { User } from '../models/user';
 import { AccountService } from '../services/account.service';
+import { MembersService } from '../services/members.service';
 
 @Component({
   selector: 'app-nav',
@@ -9,12 +13,26 @@ import { AccountService } from '../services/account.service';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-
+  member: Member;
+  user: User;
   model: any = {};
 
-  constructor(public accountService: AccountService, private router: Router, private toastr: ToastrService) { }
+  constructor(public accountService: AccountService, 
+              private router: Router, 
+              private memberService: MembersService) { 
+                this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
+              }
 
   ngOnInit(): void {
+    if(this.user !== undefined) {
+      this.loadMember();
+    }
+  }
+
+  loadMember() {
+      this.memberService.getMember(this.user.pesel).subscribe(member => {
+            this.member = member;
+          })
   }
 
   login() {

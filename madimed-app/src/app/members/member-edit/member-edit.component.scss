@@ -1,0 +1,87 @@
+.cont {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    margin-top: 50px;
+    margin-left: 100px;
+    margin-bottom: 5%;
+
+    .edit-title {
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+    }
+    .infos {
+        width: 60%;
+
+        .edit-tabset {
+            margin-top: 10px;
+
+            h4 {
+                margin-top: 20px;
+            }
+            .form-inputs {
+                margin-left: 50px;
+            }
+            span {
+                font-size: 1.1rem;
+            }
+        }
+    }
+}
+
+.form {
+    .form-inputs label {
+        width: 125px;
+        font-size: 15px;
+        font-weight: 500;
+        color: #2e2e2e;
+    }
+    .form-inputs input{
+        width: 300px;
+        outline: none;
+        font-family: sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        color: #333;
+        border: 1px solid #aaa;
+        padding: 0 15px;
+        height: 42px;
+        margin: 10px 0;
+        margin-left: 5px;
+    }
+    .form-inputs input:is(:focus, :valid){
+        box-shadow: 0 3px 6px rgba(0,0,0,0.13);
+    }
+    .form-inputs input[type="date"]{
+        color: #707070;
+    }
+    .form-inputs input[type="date"]:valid {
+        color: #333;
+    }
+}
+.edit-submit {
+    .save {
+        min-width: 300px;
+        width: auto;
+        padding: 0;
+        margin: auto;
+        margin-top: 25px;
+        background-color: rgba(0, 123, 255, 0.9);
+        .btnText {
+            color: #fff;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+    }
+    .save:hover {
+        background-color: rgba(0, 123, 255, 1);
+    }
+    .save:disabled {
+        background-color: lightgray;
+    }
+}

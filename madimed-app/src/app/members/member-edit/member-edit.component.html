@@ -1,0 +1,83 @@
+<div class="cont">
+    <div class="edit-title">
+        <h1 *ngIf="member">Edit your profile</h1>
+        <div class="edit-submit">
+            <button type="submit" class="save" [disabled]="!editForm.dirty" form="editForm" mat-raised-button color="success">
+                <span class="btnText">Save Changes</span>
+            </button>
+        </div>
+    </div>
+    <div class="infos">
+        <tabset class="edit-tabset">
+            <tab class="member-tabset" heading="Personal data">
+
+                <form #editForm="ngForm" id="editForm" (ngSubmit)="updateMember()">
+                    <div class="form first">
+                        <h4 class="header">Personal data</h4>
+
+                        <div class="form-inputs">
+                            <label>First name</label>
+                            <input type="text" placeholder="Enter your name" [(ngModel)]="member.firstName"
+                                name="firstName">
+                        </div>
+                        <div class="form-inputs">
+                            <label>Last name</label>
+                            <input type="text" placeholder="Enter your last name" [(ngModel)]="member.lastName"
+                                name="lastName">
+                        </div>
+                        <div class="form-inputs">
+                            <label>Date of birth</label>
+                            <input type="date" placeholder="Enter your date" [(ngModel)]="member.dateOfBirth"
+                                name="dateOfBirth">
+                        </div>
+                        <div class="form-inputs">
+                            <label>Phone number</label>
+                            <input type="text" placeholder="Enter your phone number" [(ngModel)]="member.phone"
+                                name="phone">
+                        </div>
+                    </div>
+                </form>
+            </tab>
+            <tab class="member-tabset" heading="Location details">
+                <form #editForm="ngForm" id="editForm" (ngSubmit)="updateMember()">
+                    <div class="form second">
+                        <h4 class="header">Address</h4>
+
+                        <div class="form-inputs">
+                            <label>Street</label>
+                            <input type="text" placeholder="Enter your street" [(ngModel)]="member.street" name="street">
+                        </div>
+                        <div class="form-inputs">
+                            <label>Town</label>
+                            <input type="text" placeholder="Enter your town" [(ngModel)]="member.town" name="town">
+                        </div>
+                        <div class="form-inputs">
+                            <label>Code</label>
+                            <input type="text" placeholder="Enter your code" [(ngModel)]="member.code" name="code">
+                        </div>
+                    </div>
+                </form>
+            </tab>
+            <tab class="member-tabset" heading="Account informations">
+                <form #editForm="ngForm" id="editForm" (ngSubmit)="updateMember()">
+                    <div class="form third">
+                        <h4 class="header">Account changes</h4>
+
+                        <div class="form-inputs">
+                            <label>Email</label>
+                            <input type="text" placeholder="Enter your email" [(ngModel)]="member.email" name="email">
+                        </div>
+                        <div class="form-inputs">
+                            <label>New password</label>
+                            <input type="password" placeholder="Enter your new password" name="pass">
+                        </div>
+                        <div class="form-inputs">
+                            <label>Repeat password</label>
+                            <input type="password" placeholder="Repeat your new password" name="pass">
+                        </div>
+                    </div>
+                </form>
+            </tab>
+        </tabset>
+    </div>
+</div>

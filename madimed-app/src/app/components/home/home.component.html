@@ -4,7 +4,7 @@
         <div class="tiles">
             <div class="tiles-tile tile-one">
                 <div class="tiles-text">
-                    <h4>Open<span class="letter">H</span><span>ours</span></h4>
+                    <h4>Open<span claprimaryss="letter">H</span><span>ours</span></h4>
                     <p class="tex">Monday - Friday<span>7:00 - 6:00 pm</span></p>
                     <p class="tex">Saturday<span>7:00 - 3:00 pm</span></p>
                     <p class="tex">Sunday<span>Close</span></p>
@@ -22,7 +22,7 @@
             <div class="tiles-tile tile-three">
                 <div *ngIf="!(accountService.currentUser$ | async)" class="tiles-text">
                     <h4>You dont have an account yet?</h4>
-                    <button (click)="registerToggle()" class="btn btn-primary btn-lg">Register Now</button>
+                    <button (click)="registerToggle()" class="btn btn-primary btn-lg">Sign up</button>
                     <span class="drop-number">03</span>
                 </div>
                 <div *ngIf="accountService.currentUser$ | async" class="tiles-text">
@@ -38,10 +38,10 @@
     <div class="panel-2">
         <div class="tile">
             <div class="tile-text">
-                <h1>We strive to Provide You & Your Family with the best 
+                <h1>We strive to Provide You & Your Family with the best
                     Medical and General Practice Care</h1>
-                <h6>We provide all aspects od medical practice for your whole 
-                    family inculding general check-ups 
+                <h6>We provide all aspects od medical practice for your whole
+                    family inculding general check-ups
                     or assisting you with specific injuries</h6>
                 <p>We will work with you </p>
             </div>
@@ -52,6 +52,52 @@
     </div>
     <hr>
     <div class="panel-3" id="contact">
+        <footer>
+            <div class="row primary">
+                <div class="column about">
+                    <h3>Contact</h3>
+                    <div class="row contact">
+                        <div class="column">
+                            <p>Address:</p>
+                        </div>
+                        <div class="column">
+                            <p>Mandel Street</p>
+                            <p>45-700 Opole</p>
+                        </div>
+                    </div>
+                    <div class="row contact">
+                        <div class="column right">
+                            <p>Telephone:</p>
+                        </div>
+                        <div class="column right">
+                            <p>00 47 821 234</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="column links">
+                    <h3>Some Links</h3>
+                    <ul>
+                        <li><a href="#faq">F.A.Q</a></li>
+                        <li><a href="#cookies-policy">Cookies Policy</a></li>
+                        <li><a href="#terms-of-services">Terms Of Service</a></li>
+                        <li><a href="#support">Support</a></li>
+                    </ul>
+                </div>
+                <div class="column subscribe">
+                    <h3>Newsletter</h3>
+                    <div>
+                        <input type="email" placeholder="Your email id here" />
+                        <button class="btn btn-primary">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>Copyright &copy; 2022 Madimed Clinic</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- <div class="panel-3" id="contact">
         <div class="grid-container">
             <div class="title-con">
             <h1>Contact</h1>
@@ -70,7 +116,7 @@
                 <h3>Footer</h3>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 
 

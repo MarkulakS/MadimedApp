@@ -30,7 +30,7 @@ namespace API.Data
             return await _context.Users.FindAsync(id);
         }
 
-        public async Task<AppUser> GetUserByUsernameAsync(string pesel)
+        public async Task<AppUser> GetUserByPeselAsync(string pesel)
         {
             return await _context.Users.SingleOrDefaultAsync(x => x.Pesel == pesel);
         }

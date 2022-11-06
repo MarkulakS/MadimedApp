@@ -12,9 +12,6 @@ export class HomeComponent implements OnInit {
   constructor(public accountService: AccountService) { }
 
   ngOnInit(): void {
-    console.log("Zalogowny czy nie: " + this.accountService.currentUser$.subscribe(response => {
-      console.log("cos tu jest: " + response);
-    }));
   }
 
   registerToggle() {

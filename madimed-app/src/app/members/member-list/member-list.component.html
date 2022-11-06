@@ -7,7 +7,7 @@
             <h6>Last Name</h6>
             <h6 style="text-align: center">Details</h6>
         </div>
-        <div class="details" *ngFor="let member of members">
+        <div class="details" *ngFor="let member of members$ | async">
             <app-member-detail class="member-details" [member]="member"></app-member-detail>
         </div>
     </div>
