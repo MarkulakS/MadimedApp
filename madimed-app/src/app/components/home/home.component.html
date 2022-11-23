@@ -19,7 +19,7 @@
                     <span class="drop-number">02</span>
                 </div>
             </div>
-            <div class="tiles-tile tile-three">
+            <div class="tiles-tile tile-three" id="signup">
                 <div *ngIf="!(accountService.currentUser$ | async)" class="tiles-text">
                     <h4>You dont have an account yet?</h4>
                     <button (click)="registerToggle()" class="btn btn-primary btn-lg">Sign up</button>
@@ -35,7 +35,7 @@
         </div>
     </div>
     <hr>
-    <div class="panel-2">
+    <div class="panel-2" id="about">
         <div class="tile">
             <div class="tile-text">
                 <h1>We strive to Provide You & Your Family with the best

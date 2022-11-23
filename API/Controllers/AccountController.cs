@@ -8,6 +8,7 @@ using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,68 +18,67 @@ namespace API.Controllers
     {
         private readonly DataContext _context;
         private readonly ITokenService tokenService;
+        public readonly IMapper _mapper;
 
-        public AccountController(DataContext context, ITokenService tokenService)
+        public AccountController(DataContext context, ITokenService tokenService, IMapper mapper)
         {
+            _mapper = mapper;
             _context = context;
             this.tokenService = tokenService;
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto) {
+        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
+        {
 
             if (await UserExists(registerDto.Pesel)) return BadRequest("Pesel is taken!");
 
+            var user = _mapper.Map<AppUser>(registerDto);
+
             using var hmac = new HMACSHA512();
-            
-            var user = new AppUser{
-                // Pesel = registerDto.Pesel.ToLower(),
-                Pesel = registerDto.Pesel,
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-                PasswordSalt = hmac.Key,
-                FirstName = registerDto.FirstName,
-                LastName = registerDto.LastName,
-                DateOfBirth = registerDto.DateOfBirth,
-                Phone = registerDto.Phone,
-                Email = registerDto.Email,
-                Street = registerDto.Street,
-                Town = registerDto.Town,
-                Code = registerDto.Code,
-                LastClinic = registerDto.LastClinic
-            };
+
+            // Pesel = registerDto.Pesel.ToLower(),
+            user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
+            user.PasswordSalt = hmac.Key;
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return new UserDto {
+            return new UserDto
+            {
                 Pesel = user.Pesel,
-                Token = tokenService.CreateToken(user)
+                Token = tokenService.CreateToken(user),
+                FirstName = user.FirstName
             };
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto) {
+        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
+        {
 
             var user = await _context.Users.SingleOrDefaultAsync(x => x.Pesel == loginDto.Pesel);
 
-            if(user == null) return Unauthorized("Invalid pesel");
+            if (user == null) return Unauthorized("Invalid pesel");
 
             using var hmac = new HMACSHA512(user.PasswordSalt);
 
             var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
 
-            for(int i = 0; i< computedHash.Length; i++)
+            for (int i = 0; i < computedHash.Length; i++)
             {
-                if(computedHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid password");
+                if (computedHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid password");
             }
 
-            return new UserDto {
+            return new UserDto
+            {
                 Pesel = user.Pesel,
-                Token = tokenService.CreateToken(user)
+                Token = tokenService.CreateToken(user),
+                FirstName = user.FirstName
             };
         }
 
-        private async Task<bool> UserExists(string pesel) {
+        private async Task<bool> UserExists(string pesel)
+        {
             return await _context.Users.AnyAsync(x => x.Pesel == pesel);
             // return await _context.Users.AnyAsync(x => x.Pesel == pesel.ToLower());
 

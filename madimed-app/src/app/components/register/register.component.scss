@@ -36,7 +36,6 @@ form .form {
         width: 100%;
         margin-left: 30px;
         margin-top: 20px;
-        margin-bottom: 10px;
         transition: 0.7 ease;
         span{
             margin-left: 10px;
@@ -77,15 +76,11 @@ form .form {
 
 .form-inputs {
     display: flex;
-    width: calc(100% / 2 - 30px);
-    flex-direction: column;
+    flex-wrap: wrap;
+    width: 48%;
     margin: 4px 5px;
 }
-.form-inputs label {
-    font-size: 15px;
-    font-weight: 500;
-    color: #2e2e2e;
-}
+
 .form-inputs input{
     outline: none;
     font-family: sans-serif;
@@ -95,7 +90,7 @@ form .form {
     border: 1px solid #aaa;
     padding: 0 15px;
     height: 42px;
-    margin: 8px 0;
+    margin-top: 8px;
 }
 .form-inputs input:is(:focus, :valid){
     box-shadow: 0 3px 6px rgba(0,0,0,0.13);
@@ -109,6 +104,7 @@ form .form {
 
 //hidden input about other clinic
 .clinic {
+    flex-direction: column;
     width: 100%;
     margin-left: 25px;
     input {
@@ -164,6 +160,9 @@ form .form {
 .rightBtn:hover {
     background-color: rgba(0, 123, 255, 1);
 }
+.rightBtn:disabled {
+    background-color: rgba(0, 123, 255, 0.4);
+}
 
 // css for checkbox
 ::ng-deep .mat-checkbox-checked.mat-accent {
@@ -177,4 +176,21 @@ form .form {
 }
 ::ng-deep .mat-checkbox-frame {
     border-color: #333;
+}
+
+@media (max-width: 900px) {
+    .form-inputs {
+        width: 100%;
+    }
+    .clinic {
+        margin: 4px 10px;
+        input {
+            width: 100%;
+        }
+    }
+    .user-details {
+        .chcBox ,.chcInfo{
+            margin-left: 10px;
+        }
+    }
 }

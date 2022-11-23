@@ -10,7 +10,6 @@ import { AccountService } from './services/account.service';
 })
 export class AppComponent implements OnInit {
   title = 'madimed-app';
-  users: any;
 
   constructor(private http: HttpClient, private accountService: AccountService)  {}
 
@@ -19,7 +18,7 @@ export class AppComponent implements OnInit {
   }
 
   setCurrentUser() {
-    const user: User =   JSON.parse(localStorage.getItem('user')!);
+    const user: User = JSON.parse(localStorage.getItem('user'));
     this.accountService.setCurrentUser(user);
   }
 }

@@ -13,7 +13,7 @@ import { MembersService } from '../services/members.service';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-  member: Member;
+  member: Member = {} as Member;
   user: User;
   model: any = {};
 
@@ -24,7 +24,7 @@ export class NavComponent implements OnInit {
               }
 
   ngOnInit(): void {
-    if(this.user !== undefined) {
+    if(this.user !== null) {
       this.loadMember();
     }
   }

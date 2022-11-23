@@ -7,11 +7,17 @@
                 <li class="item">
                     <a class="link" href="#home">Home</a>
                 </li>
-                <li class="item" *ngIf="accountService.currentUser$ | async">
+                <li class="item" *ngIf="(accountService.currentUser$ | async) == null">
+                    <a class="link" href="#about">About</a>
+                </li>
+                <li class="item" *ngIf="((accountService.currentUser$ | async) && (member.id > 0))">
                     <a class="link" routerLink="/members" routerLinkActive='active'>Members</a>
                 </li>
-                <li class="item" *ngIf="accountService.currentUser$ | async">
-                    <a class="link" routerLink="/lists" routerLinkActive='active'>Lists</a>
+                <li class="item" *ngIf="((accountService.currentUser$ | async) && (member.id > 0))">
+                    <a class="link" routerLink="/visits" routerLinkActive='active'>Visits</a>
+                </li>
+                <li class="item" *ngIf="((accountService.currentUser$ | async) && (member.id > 0))">
+                    <a class="link" routerLink="/history" routerLinkActive='active'>History</a>
                 </li>
                 <li class="item">
                     <a class="link" href="#contact">Contact</a>
@@ -23,12 +29,11 @@
                 </li> -->
         </ul>
 
-        <ng-container *ngIf="member">
+        <ng-container>
             <div class="dropdown navbar-full" *ngIf="(accountService.currentUser$ | async) as user">
                 <ol>
                     <li>
-                        <!-- <a>Welcome {{member.firstName}}</a> -->
-                        <a>Welcome</a>
+                        <a>Welcome {{user.firstName | titlecase}}</a>
                         <ul>
                             <li><a routerLink="/member/edit">Edit Profile</a></li>
                             <hr>
@@ -62,11 +67,12 @@
                 </div>
                 <ul class="menu-items">
                     <li><a href="#home">Home</a></li>
-                    <li><a routerLink="/members">List</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a routerLink="/members">Members</a></li>
                     <li><a routerLink="/lists">Info</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <li><a routerLink="/login-mobile">Login</a></li>
-                    <li><a >Register</a></li>
+                    <li><a href="#signup">Sign Up</a></li>
                 </ul>
                 <!-- <button mat-icon-button>
                 <mat-icon>menu</mat-icon>

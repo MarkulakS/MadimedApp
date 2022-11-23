@@ -2,16 +2,16 @@
     <div class="edit-title">
         <h1 *ngIf="member">Edit your profile</h1>
         <div class="edit-submit">
-            <button type="submit" class="save" [disabled]="!editForm.dirty" form="editForm" mat-raised-button color="success">
+            <button type="submit" class="save" [disabled]="!editForm.dirty" form="editForm" mat-raised-button
+                color="success">
                 <span class="btnText">Save Changes</span>
             </button>
         </div>
     </div>
     <div class="infos">
-        <tabset class="edit-tabset">
-            <tab class="member-tabset" heading="Personal data">
-
-                <form #editForm="ngForm" id="editForm" (ngSubmit)="updateMember()">
+        <form #editForm="ngForm" id="editForm" (ngSubmit)="updateMember()">
+            <tabset class="edit-tabset">
+                <tab class="member-tabset" heading="Personal data">
                     <div class="form first">
                         <h4 class="header">Personal data</h4>
 
@@ -36,16 +36,15 @@
                                 name="phone">
                         </div>
                     </div>
-                </form>
-            </tab>
-            <tab class="member-tabset" heading="Location details">
-                <form #editForm="ngForm" id="editForm" (ngSubmit)="updateMember()">
+                </tab>
+                <tab class="member-tabset" heading="Location details">
                     <div class="form second">
                         <h4 class="header">Address</h4>
 
                         <div class="form-inputs">
                             <label>Street</label>
-                            <input type="text" placeholder="Enter your street" [(ngModel)]="member.street" name="street">
+                            <input type="text" placeholder="Enter your street" [(ngModel)]="member.street"
+                                name="street">
                         </div>
                         <div class="form-inputs">
                             <label>Town</label>
@@ -56,10 +55,8 @@
                             <input type="text" placeholder="Enter your code" [(ngModel)]="member.code" name="code">
                         </div>
                     </div>
-                </form>
-            </tab>
-            <tab class="member-tabset" heading="Account informations">
-                <form #editForm="ngForm" id="editForm" (ngSubmit)="updateMember()">
+                </tab>
+                <tab class="member-tabset" heading="Account informations">
                     <div class="form third">
                         <h4 class="header">Account changes</h4>
 
@@ -69,15 +66,15 @@
                         </div>
                         <div class="form-inputs">
                             <label>New password</label>
-                            <input type="password" placeholder="Enter your new password" name="pass">
+                            <input type="password" placeholder="Enter new password" name="pass">
                         </div>
                         <div class="form-inputs">
                             <label>Repeat password</label>
-                            <input type="password" placeholder="Repeat your new password" name="pass">
+                            <input type="password" placeholder="Repeat new password" name="pass">
                         </div>
                     </div>
-                </form>
-            </tab>
-        </tabset>
+                </tab>
+            </tabset>
+        </form>
     </div>
 </div>

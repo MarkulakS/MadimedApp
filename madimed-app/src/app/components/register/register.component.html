@@ -1,32 +1,13 @@
-<form #registerForm="ngForm" class="form-register" (ngSubmit)="register()" autocomplete="off">
+<form [formGroup]="registerForm" class="form-register" (ngSubmit)="registerForm.valid && register()" autocomplete="off">
     <div class="form first" *ngIf="isActiveF">
         <div class="user-details">
             <span class="header">Personal data</span>
-
-            <div class="form-inputs">
-                <label>First name</label>
-                <input type="text" placeholder="Enter your name" [(ngModel)]="model.firstName" name="fName">
-            </div>
-            <div class="form-inputs">
-                <label>Last name</label>
-                <input type="text" placeholder="Enter your last name" [(ngModel)]="model.lastName" name="lName">
-            </div>
-            <div class="form-inputs">
-                <label>Date of birth</label>
-                <input type="date" placeholder="Enter your date" [(ngModel)]="model.dateOfBirth" name="date">
-            </div>
-            <div class="form-inputs">
-                <label>Pesel</label>
-                <input type="text" placeholder="Enter your pesel" [(ngModel)]="model.pesel" name="pes">
-            </div>
-            <div class="form-inputs">
-                <label>Phone number</label>
-                <input type="text" placeholder="Enter your phone number" [(ngModel)]="model.phone" name="ph">
-            </div>
-            <div class="form-inputs">
-                <label>Email</label>
-                <input type="text" placeholder="Enter your email" [(ngModel)]="model.email" name="em">
-            </div>
+                <app-text-input class="form-inputs" [formControl]='registerForm.controls["firstName"]' [label]='"first name"'></app-text-input>
+                <app-text-input class="form-inputs" [formControl]='registerForm.controls["lastName"]' [label]='"last name"'></app-text-input>
+                <app-text-input class="form-inputs" [formControl]='registerForm.controls["dateOfBirth"]' [label]='"date of birth"' [type]='"date"'></app-text-input>
+                <app-text-input class="form-inputs" [formControl]='registerForm.controls["pesel"]' [label]='"pesel"' [type]='"pesel"'></app-text-input>
+                <app-text-input class="form-inputs" [formControl]='registerForm.controls["phone"]' [label]='"phone number"'></app-text-input>
+                <app-text-input class="form-inputs" [formControl]='registerForm.controls["email"]' [label]='"email"' [type]='"email"'></app-text-input>
         </div>
         <div class="form-buttons">
             <button type="button" class="leftBtn" mat-raised-button color="success" (click)="cancel()">
@@ -36,44 +17,39 @@
                 <span class="btnText">Next</span>
             </button>
         </div>
+        <div *ngIf="validationsErrors.length > 0">
+            <ul class="text-danger">
+                <li *ngFor="let error of validationsErrors">{{error}}</li>
+            </ul>
+        </div>
     </div>
     <div class="form second" *ngIf="isActiveS">
         <div class="user-details">
             <span class="header">Address</span>
+            <app-text-input class="form-inputs" [formControl]='registerForm.controls["street"]' [label]='"street"'></app-text-input>
+            <app-text-input class="form-inputs" [formControl]='registerForm.controls["password"]' [label]='"password"' [type]='"password"'></app-text-input>
+            <app-text-input class="form-inputs" [formControl]='registerForm.controls["town"]' [label]='"town"'></app-text-input>
+            <app-text-input class="form-inputs" [formControl]='registerForm.controls["confirmPassword"]' [label]='"confirm password"' [type]='"password"'></app-text-input>
+            <app-text-input class="form-inputs" [formControl]='registerForm.controls["code"]' [label]='"code"'></app-text-input>
 
-            <div class="form-inputs">
-                <label>Street</label>
-                <input type="text" placeholder="Enter your street" [(ngModel)]="model.street" name="st">
-            </div>
-            <div class="form-inputs">
-                <label>Password</label>
-                <input type="text" placeholder="Enter your home number" [(ngModel)]="model.password" name="numH">
-            </div>
-            <div class="form-inputs">
-                <label>Town</label>
-                <input type="text" placeholder="Enter your town" [(ngModel)]="model.town" name="tw">
-            </div>
-            <div class="form-inputs">
-                <label>Code</label>
-                <input type="text" placeholder="Enter your code" [(ngModel)]="model.code" name="code">
-            </div>
             <div class="chcBox">
                 <mat-checkbox (change)="onCheckboxChange($event)">
-                    Have you been registered in other medical clinic before?
+                    Have you been signed up in other medical clinic before?
                 </mat-checkbox>
             </div>
             <div class="form-inputs clinic" *ngIf="isCheckedClinic">
                 <label>Your last medical clinic</label>
-                <input type="text" placeholder="Enter the name and address of the previous medical clinic" [(ngModel)]="model.lastClinic" name="clin">
+                <input type="text" placeholder="Enter the name and address of the previous medical clinic"
+                    formControlName="lastClinic">
             </div>
-            <span class="chcInfo" *ngIf="isCheckedClinic">We will contact with them about your patient
-                history</span>
+            <span class="chcInfo" *ngIf="isCheckedClinic" style="margin-top: 0;">We will contact with them about your
+                patient history</span>
         </div>
         <div class="form-buttons">
             <button type="button" class="leftBtn" mat-raised-button color="success" (click)="activeFirst()">
                 <span class="btnText">Back</span>
             </button>
-            <button type="submit" class="rightBtn" mat-raised-button color="success">
+            <button [disabled]="!registerForm.valid" type="submit" class="rightBtn" mat-raised-button color="success">
                 <span class="btnText">Submit</span>
             </button>
         </div>

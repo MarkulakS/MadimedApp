@@ -7,7 +7,10 @@
     right: 10px;
 }
 html, body { height: 100%; scroll-behavior: smooth;}
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 /* Importing Bootstrap SCSS file. */
 @import "~bootstrap/scss/bootstrap";

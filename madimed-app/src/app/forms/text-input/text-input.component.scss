@@ -1,0 +1,33 @@
+.form-inputs {
+    display: flex;
+    // width: calc(100% / 2 - 30px);
+    width: 100%;
+    flex-direction: column;
+    margin: 4px 5px;
+}
+.form-inputs label {
+    font-size: 15px;
+    font-weight: 500;
+    color: #2e2e2e;
+}
+.form-inputs input{
+    outline: none;
+    font-family: sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    border: 1px solid #aaa;
+    padding: 0 15px;
+    height: 42px;
+    margin-top: 0;
+}
+.form-inputs input:focus{
+    border: 1px solid #333;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+}
+
+.invalid-feedback {
+    margin-top: -2px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}

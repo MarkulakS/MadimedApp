@@ -9,5 +9,6 @@ namespace API.DTOs
     {
         public string Pesel { get; set; }
         public string Token { get; set; }
+        public string FirstName { get; set; }
     }
 }
