@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox'; 
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   declarations: [],
@@ -16,7 +17,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     ToastrModule.forRoot({
       positionClass: 'toastr-bottom-right'
     }),
-    TabsModule.forRoot()
+    TabsModule.forRoot(),
+    PaginationModule.forRoot()
   ],
   exports: [
     MatButtonModule,
@@ -24,6 +26,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     MatCheckboxModule,
     ToastrModule,
     TabsModule,
+    PaginationModule
   ]
 })
 export class SharedModule { }

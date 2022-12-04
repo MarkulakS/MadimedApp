@@ -6,9 +6,24 @@
             <h6>First Name</h6>
             <h6>Last Name</h6>
             <h6 style="text-align: center">Details</h6>
+            <h6 style="margin: auto; text-align: center">Events</h6>
         </div>
-        <div class="details" *ngFor="let member of members$ | async">
+        <div class="details" *ngFor="let member of members">
             <app-member-detail class="member-details" [member]="member"></app-member-detail>
         </div>
+    </div>
+    <div class="pagin-class" *ngIf="pagination">
+        <pagination 
+        [boundaryLinks]="true" 
+        [totalItems]="pagination.totalItems"
+        [itemsPerPage]="pagination.itemsPerPage"
+        [maxSize]="10"
+        [(ngModel)]="pagination.currentPage"
+        (pageChanged)="pageChanged($event)"
+        previousText="&lsaquo;" 
+        nextText="&rsaquo;" 
+        firstText="&laquo;" 
+        lastText="&raquo;">
+        </pagination>
     </div>
 </div>

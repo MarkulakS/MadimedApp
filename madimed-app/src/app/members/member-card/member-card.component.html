@@ -7,7 +7,7 @@
             <tab heading="About">
                 <h2>Main Informations</h2>
                 <h4>Pesel: <span>{{member.pesel}}</span></h4>
-                <h4>Birthday: <span>{{member.dateOfBirth}}</span></h4>
+                <h4>Birthday: <span>{{member.dateOfBirth | date:'dd MMMM yyyy'}}</span></h4>
                 <h4>Age: <span>{{member.age}}</span></h4>
 
                 <h2>Address</h2>

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -27,8 +29,15 @@ namespace API.Controllers
 
         [HttpGet]
         // [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers(){
-            var users = await _userRepository.GetMembersAsync();
+        public async Task<ActionResult<PagedList<MemberDto>>> GetUsers([FromQuery]UserParams userParams){
+
+            // var pesel = User.FindFirst(ClaimTypes.NameIdentifier)?.Value; 
+            var currentUser = await _userRepository.GetUserByPeselAsync(User.GetPesel());
+            userParams.CurrentPesel = currentUser.Pesel;
+
+            var users = await _userRepository.GetMembersAsync(userParams);
+
+            Response.AddPaginationHeader(new PaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages));
 
             return Ok(users);
         }
