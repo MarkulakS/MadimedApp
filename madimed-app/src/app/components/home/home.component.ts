@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
 
 @Component({
@@ -7,19 +8,13 @@ import { AccountService } from 'src/app/services/account.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  registerMode = false;
 
-  constructor(public accountService: AccountService) { }
+  constructor(public accountService: AccountService, private route: Router) { }
 
   ngOnInit(): void {
   }
 
   registerToggle() {
-    this.registerMode = !this.registerMode;
+    this.route.navigateByUrl('/register');
   }
-
-  cancelRegisterMode(event: boolean) {
-    this.registerMode = event;
-  }
-
 }

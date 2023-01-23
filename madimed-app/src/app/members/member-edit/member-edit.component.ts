@@ -21,22 +21,27 @@ export class MemberEditComponent implements OnInit {
       $event.returnValue = true;
     }
   }
-  member: Member  = {} as Member;
+  member: Member = {} as Member;
   user: User;
+  date: string;
+  
 
-  constructor(private accountSservice: AccountService, private memberService: MembersService,
+  constructor(private accountsService: AccountService, private memberService: MembersService,
      private route: Router, private toastr: ToastrService) {
-      this.accountSservice.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
+      this.accountsService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
    }
 
   ngOnInit(): void {
     this.loadMember();
+    this.date = this.member.dateOfBirth.toLocaleDateString();
+    console.log("date: "+this.date);
   }
 
   loadMember() {
     this.memberService.getMember(this.user.pesel).subscribe(member => {
       this.member = member;
     })
+
   }
 
   cancel() {
@@ -47,6 +52,13 @@ export class MemberEditComponent implements OnInit {
     this.memberService.updateMember(this.member).subscribe(() => {
       this.toastr.success("Profile updated successfuly");
       this.editForm.reset(this.member);
+    })
+  }
+
+  deleteMember() {
+    this.memberService.deleteMember(this.member).subscribe(() => {
+      this.toastr.success("Profile deleted successfuly");
+      this.route.navigateByUrl('/');
     })
   }
 

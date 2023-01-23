@@ -10,15 +10,16 @@ import { AccountService } from 'src/app/services/account.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  @Output() cancelRegister = new EventEmitter();
   registerForm: FormGroup;
   validationsErrors: string[] = [];
+  adres: string[] = [];
 
   isActiveF = true;
   isActiveS = false;
+  isActiveT = false;
   isCheckedClinic = false;
 
-  constructor(private accountService: AccountService, private toastr: ToastrService, private router: Router,
+  constructor(private accountService: AccountService, private router: Router,
     private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -35,9 +36,11 @@ export class RegisterComponent implements OnInit {
         phone: ['', [Validators.required, Validators.minLength(9)]],
         email: ['', [Validators.required, Validators.email]],
         dateOfBirth: ['', Validators.required],
-        street: ['', Validators.required],
-        town: ['', Validators.required],
-        code: ['', Validators.required],
+        address: this.fb.group({
+          street: ['', Validators.required],
+          town: ['', Validators.required],
+          code: ['', Validators.required]
+        }),
         lastClinic: []
       })
       this.registerForm.controls['password'].valueChanges.subscribe(() => {
@@ -52,20 +55,19 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    this.accountService.register(this.registerForm.value).subscribe(response => {
-      this.router.navigateByUrl('/')
-      // this.cancel();
+    const address = this.registerForm.get('address').value;
+    const plainAddress = Object.assign({}, address);
+    const addressArray = [plainAddress];
+    this.accountService.register({...this.registerForm.value, address: addressArray}).subscribe(response => {
+      this.router.navigateByUrl('/');
     }, error => {
       this.validationsErrors = error;
-    })
+      console.log(error);
+    });
   }
 
   cancel() {
-    this.cancelRegister.emit(false);
-  }
-
-  goBack(): void {
-    this.router.navigateByUrl('/test')
+    this.router.navigateByUrl('/');
   }
 
   activeFirst(): void {
@@ -75,8 +77,15 @@ export class RegisterComponent implements OnInit {
 
   activeSecond(): void {
     this.isActiveF = false;
+    this.isActiveT = false;
     this.isActiveS = true;
   }
+
+  activeThird(): void {
+    this.isActiveS = false;
+    this.isActiveT = true;
+  }
+
 
   onCheckboxChange(event: any){
     if(event.checked){

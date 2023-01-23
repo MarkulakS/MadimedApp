@@ -8,8 +8,8 @@
             <h6 style="text-align: center">Details</h6>
             <h6 style="margin: auto; text-align: center">Events</h6>
         </div>
-        <div class="details" *ngFor="let member of members">
-            <app-member-detail class="member-details" [member]="member"></app-member-detail>
+        <div class="details" *ngFor="let member of members; let i = index">
+            <app-member-detail class="member-details" [member]="member" [i]="i"></app-member-detail>
         </div>
     </div>
     <div class="pagin-class" *ngIf="pagination">

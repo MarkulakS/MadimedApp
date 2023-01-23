@@ -23,7 +23,9 @@ namespace API.Data
         }
         public async Task<IEnumerable<AppUser>> GetUsersAsync()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users
+                .Include(a => a.Address)
+                .ToListAsync();
         }
 
         public async Task<AppUser> GetUserByIdAsync(int id)
@@ -33,12 +35,19 @@ namespace API.Data
 
         public async Task<AppUser> GetUserByPeselAsync(string pesel)
         {
-            return await _context.Users.SingleOrDefaultAsync(x => x.Pesel == pesel);
+            return await _context.Users
+                .Include(a => a.Address)
+                .SingleOrDefaultAsync(x => x.Pesel == pesel);
         }
 
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public void DeleteUser(AppUser user)
+        {
+            _context.Entry(user).State = EntityState.Deleted;
         }
 
         public void Update(AppUser user)
@@ -52,7 +61,9 @@ namespace API.Data
             //     .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
             //     .AsNoTracking();
 
-            var query = _context.Users.AsQueryable();
+            var query = _context.Users
+                .Include(a => a.Address)
+                .AsQueryable();
             
             // OrderByDescending -> sortuje odwrotnie
 
@@ -62,7 +73,7 @@ namespace API.Data
             };
             
             //pokazuje wszystkich oprocz aktualnie zalogowanego 
-            //query = query.Where(u => u.Pesel != userParams.CurrentPesel);
+            query = query.Where(u => u.Pesel != userParams.CurrentPesel);
 
 
             return await PagedList<MemberDto>.CreateAsync(
@@ -71,9 +82,12 @@ namespace API.Data
                 userParams.PageSize);
         }
 
+        
+
         public async Task<MemberDto> GetMemberAsync(string pesel)
         {
             return await _context.Users
+                .Include(a => a.Address)
                 .Where(x => x.Pesel == pesel)
                 .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();

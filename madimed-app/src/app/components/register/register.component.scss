@@ -2,10 +2,10 @@ form {
     display: flex;
     justify-content: center;
     width: 60%;
+    height: auto;
     min-width: 415px;
-    min-height: 575px;
     margin: auto;
-    margin-top: 10px;
+    margin-bottom: 25px;
     background-color: #fff;
 }
 form .form {
@@ -14,13 +14,17 @@ form .form {
     flex-wrap: wrap;
     width: 95%;
     height: 85%;   
-    margin: auto;
-    margin-top: 25px;
+    margin: 0 auto;
     padding-top: 25px;
     box-shadow: 0 0 0.5em;
     transition: 0.3 ease;
 }
 .second {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.third {
     opacity: 1;
     pointer-events: auto;
 }
@@ -35,7 +39,7 @@ form .form {
     .chcBox {
         width: 100%;
         margin-left: 30px;
-        margin-top: 20px;
+        margin-top: -15px;
         transition: 0.7 ease;
         span{
             margin-left: 10px;
@@ -78,6 +82,7 @@ form .form {
     display: flex;
     flex-wrap: wrap;
     width: 48%;
+    height: 5rem;
     margin: 4px 5px;
 }
 
@@ -104,9 +109,13 @@ form .form {
 
 //hidden input about other clinic
 .clinic {
-    flex-direction: column;
+    flex-wrap: wrap;
     width: 100%;
+    margin: 0;
     margin-left: 25px;
+    label{
+        width: 45%;
+    }
     input {
         width: 60%;
     }
@@ -116,7 +125,7 @@ form .form {
     display: flex;
     align-items: center;
     flex-direction: row;
-    margin: 25px auto;
+    margin: 50px auto 25px;
     button {
         width: 130px;
     }

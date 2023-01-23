@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -21,14 +22,15 @@ namespace API.Controllers
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+
         public UsersController(IUserRepository userRepository, IMapper mapper)
         {
             _mapper = mapper;
             _userRepository = userRepository;
         }
 
+        // [Authorize(Roles = "Personel, Admin")]
         [HttpGet]
-        // [AllowAnonymous]
         public async Task<ActionResult<PagedList<MemberDto>>> GetUsers([FromQuery]UserParams userParams){
 
             // var pesel = User.FindFirst(ClaimTypes.NameIdentifier)?.Value; 
@@ -47,7 +49,7 @@ namespace API.Controllers
             return await _userRepository.GetMemberAsync(pesel);
         }
 
-        // [HttpPut("{pesel}")]
+        [HttpPut("{pesel}")]
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto) {
             var pesel = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -61,6 +63,21 @@ namespace API.Controllers
             if(await _userRepository.SaveAllAsync()) return NoContent();
 
             return BadRequest("Failed to update user");
+        }
+
+
+        // Delete users by id
+        [HttpDelete("delete/{pesel}")]
+        public async Task<ActionResult> DeleteUser() {
+            var id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = await _userRepository.GetUserByIdAsync(Int32.Parse(id));
+            // var user = await _userRepository.GetUserByIdAsync(3);
+
+            _userRepository.DeleteUser(user);
+
+            if(await _userRepository.SaveAllAsync()) return NoContent();
+
+            return BadRequest("Failed to delete user");
         }
         
     }

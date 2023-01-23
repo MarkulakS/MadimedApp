@@ -1,0 +1,50 @@
+<div class="main">
+    <div class="visit-title">
+        <h1>Register on visit </h1>
+        <div class="visit-submit">
+            <button [disabled]="!visitForm.valid" type="submit" class="save" form="visitForm" mat-raised-button color="success">
+                <span class="btnText">Save Changes</span>
+            </button>
+        </div>
+    </div>
+    <div class="details">
+        <form #visitForm="ngForm" id="visitForm" (ngSubmit)="onSubmit()" autocomplete="off">
+            <div class="form first">
+                <h4 class="header">Visit registration form</h4>
+
+                <div class="form-inputs">
+                    <label>Doctors</label>
+                    <select name="doctors" id="doctors" required>
+                        <option value="" disabled selected hidden>Select your option</option>
+                        <option value="Wiotczak">dr. Joanna Wiotczak</option> 
+                        <!-- <option value="Tańcula">dr. Jolanta Tańcula</option> -->
+                    </select>
+                    <!--<select [(ngModel)]="model">
+                        <option *ngFor="let item of list" [value]="item">{{item}}</option>
+                    </select>"> -->
+                </div>
+                <div class="form-inputs">
+                    <label>Date of visit</label>
+                    <input type="date" name="dateVisit" min="0" [(ngModel)]="dateVisit" required>
+                </div>
+                <div class="form-inputs">
+                    <label>Time of visit</label>
+                    <timepicker [(ngModel)]="timeVisit" name="timeVisit" [showMeridian]="false" required>{{timeVisit | date:"hh:mm"}}</timepicker>
+                </div>
+                <div class="form-inputs">
+                    <label>Form</label>
+                    <select name="visits" id="visits" required>
+                        <option value="" disabled selected hidden>Select your option</option>
+                        <option value="visit">Visit</option>
+                        <option value="l4">Sick leave / prescription</option>
+                        <option value="refferal">Referral</option>
+                    </select>
+                </div>
+                <div class="form-inputs">
+                    <label>Comments</label>
+                    <textarea name="comments" placeholder="Comments about the visit" [(ngModel)]="comments"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

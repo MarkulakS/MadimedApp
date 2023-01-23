@@ -13,7 +13,6 @@ import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
-import { ListsComponent } from './lists/lists.component';
 import { SharedModule } from './modules/shared.module';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
@@ -25,6 +24,10 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { TextInputComponent } from './forms/text-input/text-input.component';
+import { VisitsComponent } from './components/visits/visits.component';
+import { VisitsListComponent } from './components/visits-list/visits-list.component';
+import { HistoryComponent } from './components/history/history.component';
+import { MemberVisitsComponent } from './members/member-visits/member-visits.component';
 
 @NgModule({
   declarations: [
@@ -34,13 +37,16 @@ import { TextInputComponent } from './forms/text-input/text-input.component';
     RegisterComponent,
     MemberListComponent,
     MemberDetailComponent,
-    ListsComponent,
     TestErrorsComponent,
     NotFoundComponent,
     ServerErrorComponent,
     MemberCardComponent,
     MemberEditComponent,
     TextInputComponent,
+    VisitsComponent,
+    VisitsListComponent,
+    HistoryComponent,
+    MemberVisitsComponent,
   ],
   imports: [
     BrowserModule,

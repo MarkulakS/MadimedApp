@@ -2,17 +2,16 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    width: 100%;
-    margin-top: 50px;
-    margin-left: 100px;
+    width: 90%;
+    margin: auto 5%;
+    margin-top: -25px;
 
     .card-title {
         display: flex;
-        width: 40%;
+        width: auto;
     }
 
     .infos {
-        min-width: 400px;
         width: 100%;
         margin-bottom: 5%;
         

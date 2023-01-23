@@ -8,6 +8,7 @@ import { Member } from 'src/app/models/members';
 })
 export class MemberDetailComponent implements OnInit {
 @Input() member: Member;
+@Input() i: number;
 
   constructor() { }
 

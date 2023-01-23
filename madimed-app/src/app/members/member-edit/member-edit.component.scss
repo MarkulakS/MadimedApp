@@ -2,8 +2,8 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: center;
-    width: 100%;
+    // justify-content: center;
+    width: calc(100vw - 100px);
     margin-top: 50px;
     margin-left: 100px;
     margin-bottom: 5%;
@@ -11,14 +11,16 @@
     .edit-title {
         display: flex;
         flex-direction: column;
-        width: 40%;
+        width: auto;
+        margin: 0;
     }
     .infos {
-        width: 60%;
-
+        width: auto;
+        margin: auto;
+        margin-left: 150px;
+        margin-right: 0;
         .edit-tabset {
             margin-top: 10px;
-
             h4 {
                 margin-top: 20px;
             }
@@ -62,7 +64,7 @@
         color: #333;
     }
 }
-.edit-submit {
+.edit-submit, .del-submit {
     .save {
         min-width: 300px;
         width: auto;
@@ -84,4 +86,19 @@
     .save:disabled {
         background-color: lightgray;
     }
+
+    .del {
+        background-color: #fff;
+        border-color: #007bff;
+        .btnText {
+            color: #007bff;
+        }
+    }
+    .del:hover {
+        background-color: #007bff;
+        .btnText {
+            color: #fff;
+        }
+    }
 }
+

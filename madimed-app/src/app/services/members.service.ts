@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { zhCnLocale } from 'ngx-bootstrap/chronos';
 import { observable, of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -8,6 +9,7 @@ import { PaginatedResult } from '../models/pagination';
 import { User } from '../models/user';
 import { UserParams } from '../models/userParams';
 import { AccountService } from './account.service';
+import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
 
 @Injectable({
   providedIn: 'root'
@@ -43,40 +45,14 @@ export class MembersService {
     
     if(response) return of(response);
 
-    let params = this.getPaginationHeaders(userParams.pageNumber, userParams.pageSize);
+    let params = getPaginationHeaders(userParams.pageNumber, userParams.pageSize);
 
-    return this.getPaginatedResult<Member[]>(this.baseUrl +  'users', params).pipe(
+    return getPaginatedResult<Member[]>(this.baseUrl +  'users', params, this.http).pipe(
       map(response => {
         this.memberCache.set(Object.values(userParams).join('-'), response);
         return response;
       })
     );
-  }
-
-  private getPaginatedResult<T>(url:string, params: HttpParams) {
-    const paginatedResult: PaginatedResult<T> = new PaginatedResult<T>();
-
-    return this.http.get<T>(url, { observe: 'response', params }).pipe(
-      map(response => {
-        if (response.body) {
-          paginatedResult.result = response.body!;
-        }
-        const pagination = response.headers.get('Pagination');
-        if (pagination) {
-          paginatedResult.pagination = JSON.parse(pagination);
-        }
-        return paginatedResult;
-      })
-    );
-  }
-
-  private getPaginationHeaders(pageNumber: number, pageSize: number) {
-    let params = new HttpParams();
-
-      params = params.append('pageNumber', pageNumber);
-      params = params.append('pageSize', pageSize);
-
-    return params;
   }
 
   getMember(pesel: string) {
@@ -85,10 +61,40 @@ export class MembersService {
     return this.http.get<Member>(this.baseUrl + 'users/' + pesel );
   }
 
+  getDoctor(firstName: string, lastName: string) {
+    const doctorLastName = this.members.find(x => x.lastName === lastName);
+    const doctor = doctorLastName.pesel;
+
+    console.log(doctor);
+
+    if(doctorLastName.firstName === firstName) 
+    {
+      console.log("i got doctor");
+      return;
+    }
+    if(doctorLastName.firstName !== firstName) {
+      console.log("undefined doctor"); 
+      return;
+    }
+    // if(doctor !== undefined) return of(doctor);
+    // if (doctor.firstName !== firstName) return of(doctor);
+    // const pesel = doctor.pesel;
+    // return this.http.get<Member>(this.baseUrl + 'users/' + pesel );
+  }
+
   updateMember(member: Member) {
     return this.http.put(this.baseUrl + 'users', member).pipe(
       map(() => {
         const index = this.members.indexOf(member);
+        this.members[index] = member;
+      })
+    )
+  }
+
+  deleteMember(member: Member) {
+    return this.http.delete(this.baseUrl + 'users').pipe(
+      map(() => {
+      const index = this.members.indexOf(member);
         this.members[index] = member;
       })
     )

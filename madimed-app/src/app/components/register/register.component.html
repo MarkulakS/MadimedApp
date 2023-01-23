@@ -7,7 +7,6 @@
                 <app-text-input class="form-inputs" [formControl]='registerForm.controls["dateOfBirth"]' [label]='"date of birth"' [type]='"date"'></app-text-input>
                 <app-text-input class="form-inputs" [formControl]='registerForm.controls["pesel"]' [label]='"pesel"' [type]='"pesel"'></app-text-input>
                 <app-text-input class="form-inputs" [formControl]='registerForm.controls["phone"]' [label]='"phone number"'></app-text-input>
-                <app-text-input class="form-inputs" [formControl]='registerForm.controls["email"]' [label]='"email"' [type]='"email"'></app-text-input>
         </div>
         <div class="form-buttons">
             <button type="button" class="leftBtn" mat-raised-button color="success" (click)="cancel()">
@@ -23,15 +22,15 @@
             </ul>
         </div>
     </div>
+
     <div class="form second" *ngIf="isActiveS">
         <div class="user-details">
             <span class="header">Address</span>
-            <app-text-input class="form-inputs" [formControl]='registerForm.controls["street"]' [label]='"street"'></app-text-input>
-            <app-text-input class="form-inputs" [formControl]='registerForm.controls["password"]' [label]='"password"' [type]='"password"'></app-text-input>
-            <app-text-input class="form-inputs" [formControl]='registerForm.controls["town"]' [label]='"town"'></app-text-input>
-            <app-text-input class="form-inputs" [formControl]='registerForm.controls["confirmPassword"]' [label]='"confirm password"' [type]='"password"'></app-text-input>
-            <app-text-input class="form-inputs" [formControl]='registerForm.controls["code"]' [label]='"code"'></app-text-input>
+            <app-text-input class="form-inputs" [formControl]="registerForm.controls['address'].controls['street']" [label]='"street"'></app-text-input>
+            <app-text-input class="form-inputs" [formControl]="registerForm.controls['address'].controls['town']" [label]='"town"'></app-text-input>
+            <app-text-input class="form-inputs" [formControl]="registerForm.controls['address'].controls['code']" [label]='"post code"'></app-text-input>
 
+            <span class="header">More informations</span>
             <div class="chcBox">
                 <mat-checkbox (change)="onCheckboxChange($event)">
                     Have you been signed up in other medical clinic before?
@@ -47,6 +46,24 @@
         </div>
         <div class="form-buttons">
             <button type="button" class="leftBtn" mat-raised-button color="success" (click)="activeFirst()">
+                <span class="btnText">Back</span>
+            </button>
+            <button type="button" class="rightBtn" mat-raised-button color="success" (click)="activeThird()">
+                <span class="btnText">Next</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="form third" *ngIf="isActiveT">
+        <div class="user-details">
+            <span class="header">Account configuration</span>
+            <app-text-input class="form-inputs" [formControl]='registerForm.controls["email"]' [label]='"email"' [type]='"email"'></app-text-input>
+
+            <app-text-input class="form-inputs" [formControl]='registerForm.controls["password"]' [label]='"password"' [type]='"password"'></app-text-input>
+            <app-text-input class="form-inputs" [formControl]='registerForm.controls["confirmPassword"]' [label]='"confirm password"' [type]='"password"'></app-text-input>
+        </div>
+        <div class="form-buttons">
+            <button type="button" class="leftBtn" mat-raised-button color="success" (click)="activeSecond()">
                 <span class="btnText">Back</span>
             </button>
             <button [disabled]="!registerForm.valid" type="submit" class="rightBtn" mat-raised-button color="success">

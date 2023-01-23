@@ -1,3 +1,5 @@
+import { Address } from "./address"
+
 export interface Member {
     id: number
     pesel: string
@@ -7,7 +9,5 @@ export interface Member {
     age: number
     email: string
     phone: string
-    town: string
-    street: string
-    code: string
+    address: Address[]
   }

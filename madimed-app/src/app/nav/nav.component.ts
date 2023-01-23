@@ -30,9 +30,9 @@ export class NavComponent implements OnInit {
   }
 
   loadMember() {
-      this.memberService.getMember(this.user.pesel).subscribe(member => {
-            this.member = member;
-          })
+    this.memberService.getMember(this.user.pesel).subscribe(member => {
+      this.member = member;
+    })
   }
 
   login() {
@@ -44,5 +44,9 @@ export class NavComponent implements OnInit {
   logout() {
     this.accountService.logout();
     this.router.navigateByUrl('/');
+  }
+
+  signUp() {
+    this.router.navigateByUrl('/register');
   }
 }

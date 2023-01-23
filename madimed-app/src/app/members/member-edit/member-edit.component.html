@@ -7,6 +7,13 @@
                 <span class="btnText">Save Changes</span>
             </button>
         </div>
+        <div class="edit-submit">
+            <button type="button" class="save del" mat-raised-button
+                color="success"
+                (click)="deleteMember()">
+                <span class="btnText">Delete Profile</span>
+            </button>
+        </div>
     </div>
     <div class="infos">
         <form #editForm="ngForm" id="editForm" (ngSubmit)="updateMember()">
@@ -27,7 +34,7 @@
                         </div>
                         <div class="form-inputs">
                             <label>Date of birth</label>
-                            <input type="date" placeholder="Enter your date" [(ngModel)]="member.dateOfBirth"
+                            <input type="text" placeholder="{{member.dateOfBirth | date:'dd . mm . yyyy'}}" onfocus="(this.type='date')"
                                 name="dateOfBirth">
                         </div>
                         <div class="form-inputs">
@@ -43,16 +50,16 @@
 
                         <div class="form-inputs">
                             <label>Street</label>
-                            <input type="text" placeholder="Enter your street" [(ngModel)]="member.street"
+                            <input type="text" placeholder="Enter your street" [(ngModel)]="member.address[0].street"
                                 name="street">
                         </div>
                         <div class="form-inputs">
                             <label>Town</label>
-                            <input type="text" placeholder="Enter your town" [(ngModel)]="member.town" name="town">
+                            <input type="text" placeholder="Enter your town" [(ngModel)]="member.address[0].town" name="town">
                         </div>
                         <div class="form-inputs">
                             <label>Code</label>
-                            <input type="text" placeholder="Enter your code" [(ngModel)]="member.code" name="code">
+                            <input type="text" placeholder="Enter your code" [(ngModel)]="member.address[0].code" name="code">
                         </div>
                     </div>
                 </tab>

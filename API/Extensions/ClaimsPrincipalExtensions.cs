@@ -15,5 +15,9 @@ namespace API.Extensions
         public static string GeUserId(this ClaimsPrincipal user) {
             return user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         }
+
+        public static string GetPeselStaff(this ClaimsPrincipal staff) {
+            return staff.FindFirst(ClaimTypes.Name)?.Value;
+        }
     }
 }

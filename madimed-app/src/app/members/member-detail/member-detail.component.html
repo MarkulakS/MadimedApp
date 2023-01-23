@@ -1,11 +1,17 @@
 <div class="list-detail">
         <div class="details">
-                <p style="width: 100px;">{{member.id}}</p>
+                <p style="width: 80px;">{{i+1}}</p>
                 <p>{{member.pesel}}</p>
                 <p>{{member.firstName}}</p>
                 <p>{{member.lastName}}</p>
                 <button type="button" routerLink="/members/{{member.pesel}}" mat-stroked-button>
                         <span>Info about member</span>
                 </button>
+                <div class="icons">
+                        <mat-icon routerLink="/members/{{member.pesel}}" alt="profil">person</mat-icon>
+                        <mat-icon alt="edit"> border_color</mat-icon>
+                        <mat-icon alt="delete">delete</mat-icon>    
+                </div>
+                
         </div> 
 </div>

@@ -15,7 +15,6 @@ import { MembersService } from 'src/app/services/members.service';
   styleUrls: ['./member-list.component.scss']
 })
 export class MemberListComponent implements OnInit {
-  // members$: Observable<Member[]> | undefined;
   members: Member[] = [];
   pagination: Pagination | undefined;
   userParams: UserParams | undefined;
@@ -26,14 +25,13 @@ export class MemberListComponent implements OnInit {
      }
 
   ngOnInit(): void {
-    // this.members$ = this.memberService.getMembers();
     this.loadMembers();
   }
 
   loadMembers() {
     if(this.userParams) {
       this.memberService.setUserParams(this.userParams);
-        this.memberService.getMembers(this.userParams).subscribe({
+      this.memberService.getMembers(this.userParams).subscribe({
         next: response => {
           if(response.result && response.pagination) {
             this.members = response.result;

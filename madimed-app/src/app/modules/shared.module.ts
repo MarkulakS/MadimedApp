@@ -6,6 +6,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox'; 
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [],
@@ -18,7 +21,10 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
       positionClass: 'toastr-bottom-right'
     }),
     TabsModule.forRoot(),
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+    TimepickerModule.forRoot(),
+    BrowserAnimationsModule,
+    BsDatepickerModule.forRoot()
   ],
   exports: [
     MatButtonModule,
@@ -26,7 +32,10 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     MatCheckboxModule,
     ToastrModule,
     TabsModule,
-    PaginationModule
+    PaginationModule,
+    TimepickerModule,
+    BsDatepickerModule,
+    BrowserAnimationsModule
   ]
 })
 export class SharedModule { }

@@ -3,26 +3,25 @@
         <h1 *ngIf="member">{{member.firstName | titlecase}} {{member.lastName | titlecase}}</h1>
     </div>
     <div class="infos">
-        <tabset class="member-tabset">
-            <tab heading="About">
+        <tabset class="member-tabset" #memberTabs>
+            <tab heading="About" (selectTab)="onTabActivated($event)">
                 <h2>Main Informations</h2>
                 <h4>Pesel: <span>{{member.pesel}}</span></h4>
                 <h4>Birthday: <span>{{member.dateOfBirth | date:'dd MMMM yyyy'}}</span></h4>
                 <h4>Age: <span>{{member.age}}</span></h4>
 
                 <h2>Address</h2>
-                <h4>Street: <span>{{member.street | titlecase}}</span></h4>
-                <h4>City: <span>{{member.town | titlecase}} {{member.code}}</span></h4>
+                <h4>Street: <span>{{member.address[0].street | titlecase}}</span></h4>
+                <h4>City: <span>{{member.address[0].town | titlecase}} {{member.address[0].code}}</span></h4>
 
                 <h2>Contact</h2>
                 <h4>Phone: <span>{{member.phone}}</span></h4>
                 <h4>Email: <span>{{member.email}}</span></h4>
             </tab>
-            <tab heading="Interest">
-                <h2>Interest</h2>
-                <p></p>
+            <tab heading="Scheduled visits" (selectTab)="onTabActivated($event)">
+                <app-member-visits #memberVisit *ngIf="member" [visits]="visits" [pesel]="member.pesel" [pagination]="pagination"></app-member-visits>
             </tab>
-            <tab heading="History">
+            <tab heading="History" (selectTab)="onTabActivated($event)">
                 <h2>History</h2>
             </tab>
         </tabset>

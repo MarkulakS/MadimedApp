@@ -8,12 +8,14 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { NavigationExtras, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { catchError } from 'rxjs/operators';
+import { catchError, take } from 'rxjs/operators';
+import { AccountService } from '../services/account.service';
+import { NavComponent } from '../nav/nav.component';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router, private toastr: ToastrService) {}
+  constructor(private router: Router, private toastr: ToastrService, private accountService: AccountService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
@@ -36,6 +38,13 @@ export class ErrorInterceptor implements HttpInterceptor {
 
             case 401:
               this.toastr.error(error.statusText, error.status);
+              if(this.accountService.currentUser$.pipe(take(1)) != undefined) {
+                localStorage.removeItem("user");
+                this.router.navigateByUrl('/');
+                console.log("Success to log out");
+              }else{
+                console.log("Failed to log out");
+              }
               break;
 
             case 404:

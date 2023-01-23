@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Entities;
 
 namespace API.DTOs
 {
@@ -30,18 +31,10 @@ namespace API.DTOs
 
         [Required]
         public DateTime DateOfBirth { get; set; }
-
-        [Required]
-        public string Town { get; set; }
-
-        [Required]
-        public string Street { get; set; }
-        
-        [Required]
-        public string Code { get; set; }
         
         public string LastClinic { get; set; }
 
+        public List<UserAddress> Address { get; set; }
 
     }
 }

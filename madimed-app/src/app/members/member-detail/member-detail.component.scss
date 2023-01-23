@@ -13,9 +13,22 @@
         height: 100%;
         margin: auto;
         margin-left: 10px;
+        padding-left: 20px;
             p, button {
                 width: 150px;
                 margin-bottom: 0;
+            }
+            .icons {
+                display: flex;
+                justify-content: center;
+                width: auto;
+                margin: auto;
+                mat-icon {
+                    margin: 0 50px;
+                }
+                mat-icon:hover {
+                    cursor: pointer;
+                }
             }
     }
 }

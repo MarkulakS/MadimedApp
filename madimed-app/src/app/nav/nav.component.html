@@ -1,6 +1,6 @@
 <nav>
     <div class="main">
-        <a class="title" routerLink="/" routerLinkActive='active'>MADIMED<span class="title-sub">Clinic</span></a>
+        <a class="title" href="#home" routerLinkActive='active'>MADIMED<span class="title-sub">Clinic</span></a>
 
         <ul class="navbar-list navbar-full">
             <ng-container>
@@ -10,13 +10,16 @@
                 <li class="item" *ngIf="(accountService.currentUser$ | async) == null">
                     <a class="link" href="#about">About</a>
                 </li>
-                <li class="item" *ngIf="((accountService.currentUser$ | async) && (member.id > 0))">
+                <li class="item" *ngIf="(accountService.currentUser$ | async)">
                     <a class="link" routerLink="/members" routerLinkActive='active'>Members</a>
                 </li>
-                <li class="item" *ngIf="((accountService.currentUser$ | async) && (member.id > 0))">
-                    <a class="link" routerLink="/visits" routerLinkActive='active'>Visits</a>
+                <li class="item" *ngIf="(accountService.currentUser$ | async)">
+                    <a class="link" routerLink="/visits" routerLinkActive='active'>New visit</a>
                 </li>
-                <li class="item" *ngIf="((accountService.currentUser$ | async) && (member.id > 0))">
+                <li class="item" *ngIf="(accountService.currentUser$ | async)">
+                    <a class="link" routerLink="/visits-list" routerLinkActive='active'>Visits list</a>
+                </li>
+                <li class="item" *ngIf="(accountService.currentUser$ | async)">
                     <a class="link" routerLink="/history" routerLinkActive='active'>History</a>
                 </li>
                 <li class="item">
@@ -26,7 +29,7 @@
             <!-- Link to test errors -->
             <!-- <li class="item">
                     <a class="link" routerLink="/errors" routerLinkActive='active'>Errors</a>
-                </li> -->
+            </li> -->
         </ul>
 
         <ng-container>
@@ -52,7 +55,7 @@
             <button type="submit" class="log" mat-stroked-button>
                 <span class="btnText">Login</span>
             </button>
-            <button type="button" class="register" mat-stroked-button>
+            <button type="button" class="register" mat-stroked-button (click)="signUp()">
                 <span class="btnText">Sign-up</span>
             </button>
         </form>
@@ -66,13 +69,33 @@
                     <span class="line line3"></span>
                 </div>
                 <ul class="menu-items">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a routerLink="/members">Members</a></li>
-                    <li><a routerLink="/lists">Info</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a routerLink="/login-mobile">Login</a></li>
-                    <li><a href="#signup">Sign Up</a></li>
+                    <li>
+                        <a href="#home">Home</a>
+                    </li>
+                    <li *ngIf="(accountService.currentUser$ | async) == null">
+                        <a href="#about">About Us</a>
+                    </li>
+                    <li *ngIf="(accountService.currentUser$ | async)">
+                        <a routerLink="/members">Members</a>
+                    </li>
+                    <li *ngIf="(accountService.currentUser$ | async)">
+                        <a href="/visit">Visits</a>
+                    </li>
+                    <li *ngIf="(accountService.currentUser$ | async)">
+                        <a routerLink="/history">History</a>
+                    </li>
+                    <li>
+                        <a href="#contact">Contact</a>
+                    </li>
+                    <li *ngIf="(accountService.currentUser$ | async)">
+                        <a (click)="logout()">Logout</a>
+                    </li>
+                    <li *ngIf="(accountService.currentUser$ | async) == null">
+                        <a routerLink="/login-mobile">Login</a>
+                    </li>
+                    <li *ngIf="(accountService.currentUser$ | async) == null">
+                        <a href="#signup">Sign Up</a>
+                    </li>
                 </ul>
                 <!-- <button mat-icon-button>
                 <mat-icon>menu</mat-icon>

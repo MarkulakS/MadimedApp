@@ -15,8 +15,6 @@ namespace API.DTOs
         public int Age { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public string Town { get; set; }
-        public string Street { get; set; }
-        public string Code { get; set; }
+        public List<AddressDto> Address { get; set; }
     }
 }
