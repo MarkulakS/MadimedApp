@@ -31,6 +31,7 @@ namespace API.DTOs
 
         [Required]
         public DateTime DateOfBirth { get; set; }
+        public string UserName { get; set; }
         
         public string LastClinic { get; set; }
 

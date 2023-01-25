@@ -23,6 +23,5 @@ namespace API.Entities
         public List<Visit> VisitDoc { get; set; }
 
         public ICollection<AppUserRole> UserRoles { get; set; }
-
     }
 }

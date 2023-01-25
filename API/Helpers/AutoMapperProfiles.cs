@@ -25,7 +25,8 @@ namespace API.Helpers
             CreateMap<UserAddress, AddressDto>();
             CreateMap<AddressDto, UserAddress>();
             CreateMap<RegisterDto, AppUser>()
-                .ForMember(d => d.UserName, o => o.MapFrom(s => s.Pesel));
+                .ForMember(d => d.UserName, o => o.MapFrom(s => s.Pesel))
+                .ForMember(d => d.Pesel, o => o.MapFrom(s => s.UserName));
             CreateMap<Visit, VisitDto>();
         }
     }

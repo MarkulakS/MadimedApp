@@ -15,12 +15,14 @@ namespace API.Data
         public static async Task SeedUsers(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
         {
             if (await userManager.Users.AnyAsync()) return;
-            
+
             var userData = await File.ReadAllTextAsync("Data/UserSeedData.json");
 
-            var options = new  JsonSerializerOptions{PropertyNameCaseInsensitive = true};
+            var options = new JsonSerializerOptions{PropertyNameCaseInsensitive = true};
 
             var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
+            // var users = JsonSerializer.Deserialize<List<AppUser>>(userData, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            // var users = JsonConvert.DeserializeObject<List<AppUser>>(userData);
 
             var roles = new List<AppRole>
             {
@@ -34,15 +36,19 @@ namespace API.Data
                 await roleManager.CreateAsync(role);
             }
 
+            
             foreach (var user in users)
             {
                 await userManager.CreateAsync(user, "Passw1!");
                 await userManager.AddToRoleAsync(user, "Member" );
-            }            
+            }    
 
             var admin = new AppUser
             {
-                Pesel = "00000000000"
+                UserName = "00000000000",
+                Pesel = "00000000000",
+                FirstName = "admin",
+                LastName = "admin"
             };
 
             await userManager.CreateAsync(admin, "Passw1!");

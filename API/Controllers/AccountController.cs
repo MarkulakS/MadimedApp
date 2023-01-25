@@ -62,6 +62,26 @@ namespace API.Controllers
             };
         }
 
+        [HttpPost("register-admin")]
+         public async Task<ActionResult> RegisterAdmin(RegisterDto registerDto)
+        {
+            if (await UserExists(registerDto.Pesel)) return BadRequest("Pesel is taken!");
+
+            var user = _mapper.Map<AppUser>(registerDto);
+
+            var result = await _userManager.CreateAsync(user, registerDto.Password);
+            Console.WriteLine(result);
+
+            if(!result.Succeeded) return BadRequest(result.Errors);
+
+            var roleResult = await _userManager.AddToRoleAsync(user, "Personel");
+            Console.WriteLine(roleResult);
+
+            if(!roleResult.Succeeded) return BadRequest(result.Errors);
+
+            return Ok("Registered personel went ok. Role result: \n" + roleResult + ".\n User result: \n"+  result);
+        }
+
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
