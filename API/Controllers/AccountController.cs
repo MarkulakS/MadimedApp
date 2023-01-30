@@ -29,7 +29,7 @@ namespace API.Controllers
         }
 
         [HttpPost("register")]
-         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
+        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
             if (await UserExists(registerDto.Pesel)) return BadRequest("Pesel is taken!");
 
@@ -44,14 +44,12 @@ namespace API.Controllers
             // await _context.SaveChangesAsync();
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
-            Console.WriteLine(result);
 
             if(!result.Succeeded) return BadRequest(result.Errors);
 
             var roleResult = await _userManager.AddToRoleAsync(user, "Member");
-            Console.WriteLine(roleResult);
 
-            if(!roleResult.Succeeded) return BadRequest(result.Errors);
+            if(!roleResult.Succeeded) return BadRequest(roleResult.Errors);
 
             return new UserDto
             {
@@ -70,16 +68,14 @@ namespace API.Controllers
             var user = _mapper.Map<AppUser>(registerDto);
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
-            Console.WriteLine(result);
 
             if(!result.Succeeded) return BadRequest(result.Errors);
 
             var roleResult = await _userManager.AddToRoleAsync(user, "Personel");
-            Console.WriteLine(roleResult);
 
             if(!roleResult.Succeeded) return BadRequest(result.Errors);
 
-            return Ok("Registered personel went ok. Role result: \n" + roleResult + ".\n User result: \n"+  result);
+            return Ok("Registered personel went ok.");
         }
 
         [HttpPost("login")]

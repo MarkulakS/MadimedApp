@@ -16,6 +16,7 @@ export class NavComponent implements OnInit {
   member: Member = {} as Member;
   user: User;
   model: any = {};
+  ngZone: any;
 
   constructor(public accountService: AccountService, 
               private router: Router, 
@@ -24,7 +25,7 @@ export class NavComponent implements OnInit {
               }
 
   ngOnInit(): void {
-    if(this.user !== null) {
+    if(this.user) {
       this.loadMember();
     }
   }
@@ -37,13 +38,17 @@ export class NavComponent implements OnInit {
 
   login() {
     this.accountService.login(this.model).subscribe( response => {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/').then(() => {
+        location.reload();
+      })
     })
   }
 
   logout() {
     this.accountService.logout();
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/').then(() => {
+      location.reload();
+    })
   }
 
   signUp() {

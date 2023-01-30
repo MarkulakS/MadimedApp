@@ -9,6 +9,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [],
@@ -24,7 +25,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PaginationModule.forRoot(),
     TimepickerModule.forRoot(),
     BrowserAnimationsModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    ModalModule.forRoot()
   ],
   exports: [
     MatButtonModule,
@@ -35,7 +37,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PaginationModule,
     TimepickerModule,
     BsDatepickerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ModalModule
   ]
 })
 export class SharedModule { }

@@ -28,6 +28,10 @@ import { VisitsComponent } from './components/visits/visits.component';
 import { VisitsListComponent } from './components/visits-list/visits-list.component';
 import { HistoryComponent } from './components/history/history.component';
 import { MemberVisitsComponent } from './members/member-visits/member-visits.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './directives/has-role.directive';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +51,10 @@ import { MemberVisitsComponent } from './members/member-visits/member-visits.com
     VisitsListComponent,
     HistoryComponent,
     MemberVisitsComponent,
+    AdminPanelComponent,
+    HasRoleDirective,
+    UserManagementComponent,
+    RolesModalComponent,
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,7 @@ namespace API.Data
     {
         public static async Task SeedUsers(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
         {
+
             if (await userManager.Users.AnyAsync()) return;
 
             var userData = await File.ReadAllTextAsync("Data/UserSeedData.json");
@@ -21,6 +22,7 @@ namespace API.Data
             var options = new JsonSerializerOptions{PropertyNameCaseInsensitive = true};
 
             var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
+            
             // var users = JsonSerializer.Deserialize<List<AppUser>>(userData, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             // var users = JsonConvert.DeserializeObject<List<AppUser>>(userData);
 
@@ -39,7 +41,7 @@ namespace API.Data
             
             foreach (var user in users)
             {
-                await userManager.CreateAsync(user, "Passw1!");
+                await userManager.CreateAsync(user, "Password1!");
                 await userManager.AddToRoleAsync(user, "Member" );
             }    
 
@@ -51,7 +53,7 @@ namespace API.Data
                 LastName = "admin"
             };
 
-            await userManager.CreateAsync(admin, "Passw1!");
+            await userManager.CreateAsync(admin, "Password1!");
             await userManager.AddToRoleAsync(admin, "Admin");
         }
     }

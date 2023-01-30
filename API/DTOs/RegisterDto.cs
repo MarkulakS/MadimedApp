@@ -14,7 +14,7 @@ namespace API.DTOs
         public string Pesel { get; set; }
         
         [Required]
-        [StringLength(8, MinimumLength = 4)]
+        [StringLength(24, MinimumLength = 8)]
         public string Password { get; set; }
 
         [Required]
@@ -31,6 +31,7 @@ namespace API.DTOs
 
         [Required]
         public DateTime DateOfBirth { get; set; }
+
         public string UserName { get; set; }
         
         public string LastClinic { get; set; }

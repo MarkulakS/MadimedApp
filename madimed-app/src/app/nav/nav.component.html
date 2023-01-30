@@ -10,17 +10,20 @@
                 <li class="item" *ngIf="(accountService.currentUser$ | async) == null">
                     <a class="link" href="#about">About</a>
                 </li>
-                <li class="item" *ngIf="(accountService.currentUser$ | async)">
+                <li class="item" *appHasRole='["Admin", "Personel"]'>
                     <a class="link" routerLink="/members" routerLinkActive='active'>Members</a>
                 </li>
-                <li class="item" *ngIf="(accountService.currentUser$ | async)">
+                <li class="item" *appHasRole='["Member"]'>
                     <a class="link" routerLink="/visits" routerLinkActive='active'>New visit</a>
                 </li>
-                <li class="item" *ngIf="(accountService.currentUser$ | async)">
+                <li class="item" *appHasRole='["Member"]'>
                     <a class="link" routerLink="/visits-list" routerLinkActive='active'>Visits list</a>
                 </li>
-                <li class="item" *ngIf="(accountService.currentUser$ | async)">
+                <li class="item" *appHasRole='["Member"]'>
                     <a class="link" routerLink="/history" routerLinkActive='active'>History</a>
+                </li>
+                <li class="item" *appHasRole='["Admin"]'>
+                    <a class="link" routerLink="/admin" routerLinkActive='active'>Admin Panel</a>
                 </li>
                 <li class="item">
                     <a class="link" href="#contact">Contact</a>

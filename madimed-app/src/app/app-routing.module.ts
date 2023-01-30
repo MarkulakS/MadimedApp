@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { HistoryComponent } from './components/history/history.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -8,6 +9,7 @@ import { VisitsComponent } from './components/visits/visits.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
+import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { PreventUnsavedChangesGuard } from './guards/prevent-unsaved-changes.guard';
 import { MemberCardComponent } from './members/member-card/member-card.component';
@@ -27,7 +29,8 @@ const routes: Routes = [
       {path: 'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard] },
       {path: 'visits-list', component: VisitsListComponent },
       {path: 'visits', component: VisitsComponent },
-      {path: 'history', component: HistoryComponent }
+      {path: 'history', component: HistoryComponent },
+      {path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard] }
     ]
   },
   {path: 'register', component: RegisterComponent },
