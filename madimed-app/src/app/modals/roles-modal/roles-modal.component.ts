@@ -8,8 +8,8 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class RolesModalComponent implements OnInit {
   pesel = '';
-  firstName = '';
-  lastName = '';
+  name = '';
+  surrname = '';
   availableRoles: any[] = [];
   selectedRoles: any[] = [];
 

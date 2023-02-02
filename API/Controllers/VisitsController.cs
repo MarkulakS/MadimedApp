@@ -56,6 +56,22 @@ namespace API.Controllers
             return BadRequest("Failed to make a visit");
         }
 
+        [HttpDelete("delete-visit/{id}")]
+        public async Task<ActionResult> DeleteVisit(int id) 
+        {
+            var visit = await _visitRepository.GetVisit(id); 
+
+            if(visit == null) return NotFound();
+
+            if(visit.DateRead != null) return BadRequest("Can't remove visit that have been made!");
+
+            _visitRepository.DeleteVisit(visit);
+
+            if(await _visitRepository.SaveAllAsync()) return Ok();
+
+            return BadRequest("Failed to remove visit");
+        }
+
         [HttpGet]
         public async Task<ActionResult<PagedList<VisitDto>>> GetVisitsForUser([FromQuery]VisitParams visitParams)
         {
@@ -69,19 +85,6 @@ namespace API.Controllers
             return visits;
         }
         
-//Pokazanie listy wizit dla personelu - dodać jakiś warunek dla roli
-        // [HttpGet]
-        // public async Task<ActionResult<PagedList<VisitDto>>> GetVisitsForPersonel([FromQuery]VisitParams visitParams)
-        // {
-        //     visitParams.Pesel = User.GetPesel();
-
-        //     var visits = await _visitRepository.GetVisitsForPersonel(visitParams);
-
-        //     Response.AddPaginationHeader(new PaginationHeader(visits.CurrentPage, visits.PageSize, 
-        //         visits.TotalCount, visits.TotalPages));
-
-        //     return visits;
-        // }
 
         [HttpGet("thread/{pesel}")]
         public async Task<ActionResult<IEnumerable<VisitDto>>> GetVisitThread(string pesel)
@@ -89,6 +92,16 @@ namespace API.Controllers
             var currentUserPesel = User.GetPesel();
 
             return Ok(await _visitRepository.GetVisitThread(currentUserPesel, pesel));
+        }
+
+        [HttpGet("date/{date}")]
+        public async Task<ActionResult> GetVisitsFromDate(DateTime date) 
+        {
+            var visits = await _visitRepository.GetVisitsFromDate(date);
+
+            if(visits == null) return Ok("Theres no visits in that day");
+
+            return Ok(visits);
         }
     }
 }

@@ -13,8 +13,10 @@ namespace API.Interfaces
         void AddVisit(Visit visit);
         void DeleteVisit(Visit visit);
         Task<Visit> GetVisit(int id);
+        Task<IEnumerable<DateTime>> GetVisitsFromDate(DateTime date);
         Task<PagedList<VisitDto>> GetVisitsForUser(VisitParams visitParams);
         Task<IEnumerable<VisitDto>> GetVisitThread(string currentUserPesel, string doctorPesel);
+        Task<IEnumerable<VisitDto>> MakeVisitDone(string currentUserPesel, string doctorPesel);
         Task<bool> SaveAllAsync();
     }
 }

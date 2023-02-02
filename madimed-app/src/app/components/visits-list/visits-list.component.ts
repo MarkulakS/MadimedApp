@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Pagination } from 'src/app/models/pagination';
+import { User } from 'src/app/models/user';
 import { Visit } from 'src/app/models/visit';
 import { VisitService } from 'src/app/services/visit.service';
 
@@ -9,6 +10,7 @@ import { VisitService } from 'src/app/services/visit.service';
   styleUrls: ['./visits-list.component.scss']
 })
 export class VisitsListComponent implements OnInit {
+  user: User;
   visits?: Visit[];
   pagination?: Pagination;
   container = 'NotDone';
@@ -18,7 +20,7 @@ export class VisitsListComponent implements OnInit {
   constructor(private visitService: VisitService) { }
 
   ngOnInit(): void {
-    this.loadVisits();
+      this.loadVisits();
   }
 
   loadVisits(): void {
@@ -36,5 +38,11 @@ export class VisitsListComponent implements OnInit {
       this.pageNumber = event.page;
       this.loadVisits();
     }
+  }
+
+  deleteVisit(id: number) {
+    this.visitService.deleteVisit(id).subscribe(() => {
+      this.loadVisits();
+    })
   }
 }

@@ -14,18 +14,14 @@
 
                 <div class="form-inputs">
                     <label>Doctors</label>
-                    <select name="doctors" id="doctors" required>
-                        <option value="" disabled selected hidden>Select your option</option>
-                        <option value="Wiotczak">dr. Joanna Wiotczak</option> 
-                        <!-- <option value="Tańcula">dr. Jolanta Tańcula</option> -->
-                    </select>
-                    <!--<select [(ngModel)]="model">
-                        <option *ngFor="let item of list" [value]="item">{{item}}</option>
-                    </select>"> -->
+                     <select [(ngModel)]="selectedPersonelId" (ngModelChange)="updateSelectedPersonel()" name="doctors" id="doctors" required>
+                        <option value="" selected disabled hidden >Select your option</option>
+                        <option *ngFor="let person of personel" [value]="person.pesel">dr. {{person.firstName}} {{person.lastName}}</option>
+                    </select>                 
                 </div>
                 <div class="form-inputs">
                     <label>Date of visit</label>
-                    <input type="date" name="dateVisit" min="0" [(ngModel)]="dateVisit" required>
+                    <input type="date" name="dateVisit" min="0" [(ngModel)]="dateVisit" (ngModelChange)="checkAvailableTimeVisit(dateVisit)" required>
                 </div>
                 <div class="form-inputs">
                     <label>Time of visit</label>

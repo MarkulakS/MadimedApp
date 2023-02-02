@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +10,7 @@ using API.Extensions;
 using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,9 +22,11 @@ namespace API.Controllers
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+        private readonly UserManager<AppUser> _userManager;
 
-        public UsersController(IUserRepository userRepository, IMapper mapper)
+        public UsersController(IUserRepository userRepository, IMapper mapper, UserManager<AppUser> userManager)
         {
+            _userManager = userManager;
             _mapper = mapper;
             _userRepository = userRepository;
         }
@@ -78,6 +80,23 @@ namespace API.Controllers
             if(await _userRepository.SaveAllAsync()) return NoContent();
 
             return BadRequest("Failed to delete user");
+        }
+
+        [HttpGet("get-personel")]
+        public async Task<ActionResult<MemberDto>> GetPersonel()
+        {
+            var personel = await _userManager.Users
+                .Where(u => u.UserRoles.Any(r => r.Role.Name == "Personel"))
+                .OrderBy(u => u.Pesel)
+                .Select(u => new {
+                    u.Id,
+                    Pesel = u.Pesel,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName
+                })
+                .ToListAsync();
+
+            return Ok(personel);
         }
         
     }

@@ -1,6 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { map } from 'rxjs/operators';
 import { RolesModalComponent } from 'src/app/modals/roles-modal/roles-modal.component';
 import { User } from 'src/app/models/user';
 import { AdminService } from 'src/app/services/admin.service';
@@ -13,28 +14,44 @@ import { AdminService } from 'src/app/services/admin.service';
 export class UserManagementComponent implements OnInit {
   personel: User[] = [];
   members: User[] = [];
+  users: User[] = [];
   bsModalRef: BsModalRef<RolesModalComponent> = new BsModalRef<RolesModalComponent>();
   availableRoles = [
     'Admin',
     'Personel',
     'Member'
   ];
+  pesel: string = '';
 
   constructor(private adminService: AdminService, private modalService: BsModalService) { }
 
   ngOnInit(): void {
-    this.getPersonelUsers();
+    this.getUsers();
+  }
+
+  getUsers() {
+    this.adminService.getUsersWithRoles().subscribe({
+      next: users => this.users = users
+    })
+  }
+  
+  getUsersByPesel() {
+    this.adminService.getUsersWithRolesByPesel(this.pesel).subscribe({
+      next: user => this.users = user
+    })
   }
 
   getPersonelUsers() {
-    this.adminService.getUsersWithRoles().subscribe({
-      next: personel => this.personel = personel
+    this.adminService.getPersonelUsers().subscribe((personel) => {
+      this.personel = personel;
+      this.users = personel;
     })
   }
 
   getMembersUsers() {
-    this.adminService.getMembersUsers().subscribe({
-      next: members => this.members = members
+    this.adminService.getMembersUsers().subscribe((member) => {
+      this.members = member;
+      this.users = member;
     })
   }
 

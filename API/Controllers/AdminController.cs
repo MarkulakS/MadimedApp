@@ -34,6 +34,25 @@ namespace API.Controllers
                 .Select(u => new {
                     u.Id,
                     Pesel = u.Pesel,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Roles = u.UserRoles.Select(r => r.Role.Name).ToList()
+                })
+                .ToListAsync();
+
+            return Ok(users);
+        }
+
+        [Authorize(Policy = "RequiredAdminRole")]
+        [HttpGet("users-with-roles/{pesel}")]
+        public async Task<ActionResult> GetUsersWithRolesByPesel(string pesel) 
+        {
+            var users = await _userManager.Users
+                .Where(u => u.Pesel == pesel)
+                .OrderBy(u => u.Pesel)
+                .Select(u => new {
+                    u.Id,
+                    Pesel = u.Pesel,
                     Roles = u.UserRoles.Select(r => r.Role.Name).ToList()
                 })
                 .ToListAsync();

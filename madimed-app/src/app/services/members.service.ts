@@ -8,6 +8,7 @@ import { Member } from '../models/members';
 import { PaginatedResult } from '../models/pagination';
 import { User } from '../models/user';
 import { UserParams } from '../models/userParams';
+import { Visit } from '../models/visit';
 import { AccountService } from './account.service';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
 
@@ -47,7 +48,7 @@ export class MembersService {
 
     let params = getPaginationHeaders(userParams.pageNumber, userParams.pageSize);
 
-    return getPaginatedResult<Member[]>(this.baseUrl +  'users', params, this.http).pipe(
+    return getPaginatedResult<Member[]>(this.baseUrl + 'users', params, this.http).pipe(
       map(response => {
         this.memberCache.set(Object.values(userParams).join('-'), response);
         return response;
@@ -61,25 +62,12 @@ export class MembersService {
     return this.http.get<Member>(this.baseUrl + 'users/' + pesel );
   }
 
-  getDoctor(firstName: string, lastName: string) {
-    const doctorLastName = this.members.find(x => x.lastName === lastName);
-    const doctor = doctorLastName.pesel;
+  getPersonel() {
+      return this.http.get<Member[]>(this.baseUrl + 'users/get-personel');
+  }
 
-    console.log(doctor);
-
-    if(doctorLastName.firstName === firstName) 
-    {
-      console.log("i got doctor");
-      return;
-    }
-    if(doctorLastName.firstName !== firstName) {
-      console.log("undefined doctor"); 
-      return;
-    }
-    // if(doctor !== undefined) return of(doctor);
-    // if (doctor.firstName !== firstName) return of(doctor);
-    // const pesel = doctor.pesel;
-    // return this.http.get<Member>(this.baseUrl + 'users/' + pesel );
+  registerVisit(model: any) {
+    return this.http.post<Visit>(this.baseUrl + 'visits', model);
   }
 
   updateMember(member: Member) {

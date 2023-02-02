@@ -1,9 +1,6 @@
-import { Time } from '@angular/common';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { DateFormatter } from 'ngx-bootstrap/datepicker';
 import { Member } from 'src/app/models/members';
-import { Pagination } from 'src/app/models/pagination';
 import { Visit } from 'src/app/models/visit';
 import { MembersService } from 'src/app/services/members.service';
 import { VisitService } from 'src/app/services/visit.service';
@@ -15,55 +12,79 @@ import { VisitService } from 'src/app/services/visit.service';
 })
 export class VisitsComponent implements OnInit {
   @ViewChild('visitForm') visitForm: NgForm;
-  member: Member = {} as Member;
-  visits: Visit[] = [];  
-  dateVisit: Date;
+  personel: Member[] = [];
+  visits: Visit[] = [];
+  selectedPersonelId: number;
+  selectedPersonel: Member;
+  dateVisit: Date = new Date();
   comments: string;
   timeVisit: any;
-  firstName: string;
-  lastName: string;
+  disableTime: Date[] = [];
 
   constructor(private memberService: MembersService, private visitService: VisitService) { }
 
   ngOnInit(): void {
-    this.makeDay();
+    this.disableDaysBefore();
+    this.getPersonel();    
+    this.selectedPersonel = this.personel.find(p => p.id === this.selectedPersonelId);
   }
 
-  makeDay() {
+  //TUTAJ
+  checkAvailableTimeVisit(timeSpan: Date) {
+    this.visitService.getTimeVisitsFromDay(timeSpan).subscribe({
+      next: time => {
+        if(time != null) {
+          for(let i=0; i<time.length;i++){
+            this.disableTime[i] = new Date(time[i]);
+            console.log(this.disableTime[i].toLocaleTimeString());
+
+            if(this.disableTime[i].toLocaleTimeString() === this.timeVisit.toLocaleTimeString()) {
+              //Tutaj możesz dodać jakieś komunikaty lub inne akcje żeby zablokować wybraną godzinę
+              
+            }
+          }
+        }
+      }
+    })
+  }
+  //TUTAJ
+
+  getPersonel() {
+    this.memberService.getPersonel().subscribe({
+      next: personel => {
+        this.personel = personel;
+      }
+    })
+  }
+
+  updateSelectedPersonel() {
+    this.selectedPersonel = this.personel.find(p => p.id === this.selectedPersonelId);
+  }
+  
+  disableDaysBefore() {
     var today = new Date().toISOString().split('T')[0];
     document.getElementsByName("dateVisit")[0].setAttribute('min', today);
   }
 
+  getTime(dateVisit: Date) {
+    let hours = this.timeVisit.getHours();
+    let minutes = this.timeVisit.getMinutes();
+
+    var time = new Date(dateVisit);
+    time.setUTCHours(hours, minutes, 0);
+
+    return time;
+  }
+
   onSubmit() {
     var e = (document.getElementById("doctors")) as HTMLSelectElement;
-    var doctor = e.options[e.selectedIndex].text;
-    var splits = doctor.split(' ');
-    this.firstName = splits[1];
-    this.lastName = splits[2];
+    var doctorPesel = e.options[e.selectedIndex].value;
 
     var m = (document.getElementById("visits")) as HTMLSelectElement;
     var form = m.options[m.selectedIndex].text;
 
     //register on visit
-    console.log(
-      "Doctor: ", doctor,
-      "\nDate of visit: ", this.dateVisit,
-      "\nTime visit: ", this.getTime().toLocaleTimeString(),
-      "\nForm of visit: ", form,
-      "\nComments: ", this.comments
-      );
-
-
-    // this.memberService.getDoctor(this.firstName, this.lastName).subscribe(member => {
-    //   this.member = member;
-    //   console.log("try pesel: " + this.member.pesel);
-    // })
-    this.memberService.getDoctor(this.firstName, this.lastName);
-
-
-    // if (!this.member.pesel) return;
-
-    // this.visitService.addVisit(this.member.pesel, this.dateVisit, this.getTime(), form, this.comments).subscribe({
+    // this.visitService.addVisit(doctorPesel, this.dateVisit, this.getTime(this.dateVisit), form, this.comments).subscribe({
     //   next: visit => 
     //   {
     //     this.visits.push(visit);
@@ -73,16 +94,4 @@ export class VisitsComponent implements OnInit {
     //   }
     // })
   }
-
-  getTime() {
-    let hours = this.timeVisit.getHours();
-    let minutes = this.timeVisit.getMinutes();
-
-    var time = new Date();
-    time.setHours(hours,minutes);
-
-    // return time.toLocaleTimeString();
-    return time;
-  }
-
 }

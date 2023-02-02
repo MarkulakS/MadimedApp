@@ -8,20 +8,35 @@
             <div class="list-header">
                 <h6 style="width: 90px">Number</h6>
                 <h6>Date of visit</h6>
-                <h6>Doctor name</h6>
+                <h6 *appHasRole='["Member"]'>Doctor name</h6>
+                <h6 *appHasRole='["Personel"]'>Patient name</h6>
                 <h6 style="width: 125px">Time of visit</h6>
                 <h6>Form</h6>
                 <h6 style="margin: auto; text-align: center">Comments</h6>
                 <h6 style="text-align: center">Status</h6>
+                <h6 *appHasRole='["Member"]' style="width: 130px"></h6>
             </div>
-            <div class="details">
+            <div class="details" *appHasRole='["Member"]'>
                 <div class="visit-details" *ngFor="let visit of visits; let i = index">
                     <p style="width: 80px">{{i+1}}</p>
                     <p>{{visit.date | date:'dd MMMM yyyy'}}</p>
                     <p>dr {{visit.doctorFirstName}} {{visit.doctorLastName}}</p>
                     <p style="width: 125px">{{visit.time | date:'hh:mm'}}</p>
                     <p>{{visit.form}}</p>
-                    <p style="margin: auto; margin-left:0; text-align: left">{{visit.comments}}</p>
+                    <p style="margin: auto; margin-left: 0; width: 210px;">{{visit.comments}}</p>
+                    <p style="text-align: center">Scheduled</p>
+                    <button type="button" class="btn btn-danger" style="margin-right: 25px" (click)="deleteVisit(visit.id)">Cancel visit</button>
+                    <hr>
+                </div>
+            </div>
+            <div class="details" *appHasRole='["Personel"]'>
+                <div class="visit-details" *ngFor="let visit of visits; let i = index">
+                    <p style="width: 80px">{{i+1}}</p>
+                    <p>{{visit.date | date:'dd MMMM yyyy'}}</p>
+                    <p>dr {{visit.senderFirstName}} {{visit.senderLastName}}</p>
+                    <p style="width: 125px">{{visit.time | date:'hh:mm'}}</p>
+                    <p>{{visit.form}}</p>
+                    <p style="margin: auto; margin-left: 0; width: 340px;">{{visit.comments}}</p>
                     <p style="text-align: center">Scheduled</p>
                     <hr>
                 </div>

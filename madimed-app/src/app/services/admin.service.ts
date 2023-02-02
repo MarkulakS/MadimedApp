@@ -15,6 +15,10 @@ export class AdminService {
     return this.http.get<User[]>(this.baseUrl + 'admin/users-with-roles');
   }
 
+  getUsersWithRolesByPesel(pesel: string) {
+    return this.http.get<User[]>(this.baseUrl + 'admin/users-with-roles/' + pesel);
+  }
+
   getMembersUsers() {
     return this.http.get<User[]>(this.baseUrl + 'admin/members');
   }

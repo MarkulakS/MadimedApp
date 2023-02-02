@@ -25,7 +25,5 @@ export class HasRoleDirective implements OnInit {
     }else{
       this.viewContainerRef.clear();
     }
-
   }
-
 }

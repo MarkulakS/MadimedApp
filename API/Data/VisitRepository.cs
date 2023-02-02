@@ -38,10 +38,21 @@ namespace API.Data
             return await _context.Visits.FindAsync(id);
         }
 
+        public async Task<IEnumerable<DateTime>> GetVisitsFromDate(DateTime date)
+        {
+            var visits = await _context.Visits
+                .Where(x => x.Date == date)
+                .Select(x => x.Time)
+                .ToListAsync();
+
+            return visits;
+        }
+
         public async Task<PagedList<VisitDto>> GetVisitsForUser(VisitParams visitParams)
         {
             var query = _context.Visits
                 .OrderBy(x => x.Date)
+                .ThenBy(x => x.Time)
                 .AsQueryable();
 
             query = visitParams.Container switch
@@ -72,23 +83,37 @@ namespace API.Data
             return _mapper.Map<IEnumerable<VisitDto>>(visits);
         }
 
-    //nadanie daty odczytania wizyty gdy sie obejrzy wszystkie
+        public async Task<IEnumerable<VisitDto>> MakeVisitDone(string currentUserPesel, string doctorPesel)
+        {
+            var visits = await _context.Visits
+                .Include(u => u.Sender)
+                .Where(
+                    m => m.DoctorPesel == currentUserPesel &&
+                    m.SenderPesel == doctorPesel ||
+                    m.DoctorPesel == doctorPesel && 
+                    m.SenderPesel == currentUserPesel
+                )
+                .OrderBy(m => m.Date)
+                .ToListAsync();
 
-            // var notDoneVisits = visits.Where(m => m.DateRead == null
-            //     && m.DoctorPesel == currentUserPesel).ToList();
+        //nadanie daty odczytania wizyty gdy sie obejrzy wszystkie
 
-            // if(notDoneVisits.Any())
-            // {
-            //     foreach(var visit in notDoneVisits)
-            //     {
-            //         visit.DateRead = DateTime.UtcNow;
-            //     }
-            //     await _context.SaveChangesAsync();
-            // }
+            var notDoneVisits = visits.Where(m => m.DateRead == null
+                && m.DoctorPesel == currentUserPesel).ToList();
 
-           
+            if(notDoneVisits.Any())
+            {
+                foreach(var visit in notDoneVisits)
+                {
+                    visit.DateRead = DateTime.UtcNow;
+                }
+                await _context.SaveChangesAsync();
+            }
 
-        public async  Task<bool> SaveAllAsync()
+            return _mapper.Map<IEnumerable<VisitDto>>(visits);
+        }
+
+        public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
         }

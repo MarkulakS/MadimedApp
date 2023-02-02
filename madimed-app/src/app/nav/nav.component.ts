@@ -37,7 +37,7 @@ export class NavComponent implements OnInit {
   }
 
   login() {
-    this.accountService.login(this.model).subscribe( response => {
+    this.accountService.login(this.model).subscribe(() => {
       this.router.navigateByUrl('/').then(() => {
         location.reload();
       })

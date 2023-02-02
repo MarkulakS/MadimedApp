@@ -3,13 +3,6 @@
         <h1>Admin Panel</h1>
     </div>
     <div class="infos">
-        <tabset class="member-tabset" #memberTabs>
-            <tab heading="User management" *appHasRole="['Admin']">
-                <app-user-management></app-user-management>
-            </tab>
-            <!-- <tab heading="History">
-                <h2>History</h2>
-            </tab> -->
-        </tabset>
+        <app-user-management></app-user-management>
     </div>
 </div>

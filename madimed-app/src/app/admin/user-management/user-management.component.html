@@ -1,17 +1,35 @@
 <div class="row">
     <table class="table">
-        <thead>
+        <thead style="border-top: none">
             <tr>
-                <th style="width: 30%">Pesel</th>
-                <th style="width: 40%">Active roles</th>
-                <th style="width: 30%"></th>
+                <th style="width: 15%">Pesel</th>
+                <th style="width: 15%">Name</th>
+                <th style="width: 20%">Active roles</th>
+                <th style="width: 50%">
+                    <form>
+                        <input name="pesel" type="text" class="form-input form-control" [(ngModel)]="pesel" placeholder="Pesel"> 
+                        <button type="button" class="leftBtn" mat-raised-button color="success" (click)="getUsersByPesel()">
+                            <span class="btnText">Search</span>
+                        </button>
+                        <label class="form-radio">
+                            <input type="radio" name="users" id="" (click)="getUsers()" checked>All
+                        </label>
+                        <label class="form-radio">
+                            <input type="radio" name="users" (click)="getMembersUsers()" id="">Members
+                        </label>
+                        <label class="form-radio">
+                            <input type="radio" name="users" (click)="getPersonelUsers()" id="">Personel
+                        </label>
+                    </form>
+                </th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let user of personel">
+            <tr *ngFor="let user of users">
                 <td>{{user.pesel}}</td>
+                <td>{{user.firstName}} {{user.lastName}}</td>
                 <td>{{user.roles}}</td>
-                <td>
+                <td style="margin: auto;">
                     <button class="btn btn-info" (click)="openRolesModal(user)">Edit roles</button>
                 </td>
             </tr>

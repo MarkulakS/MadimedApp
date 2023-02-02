@@ -16,14 +16,14 @@
                 <li class="item" *appHasRole='["Member"]'>
                     <a class="link" routerLink="/visits" routerLinkActive='active'>New visit</a>
                 </li>
-                <li class="item" *appHasRole='["Member"]'>
+                <li class="item" *appHasRole='["Member","Personel"]'>
                     <a class="link" routerLink="/visits-list" routerLinkActive='active'>Visits list</a>
                 </li>
                 <li class="item" *appHasRole='["Member"]'>
                     <a class="link" routerLink="/history" routerLinkActive='active'>History</a>
                 </li>
                 <li class="item" *appHasRole='["Admin"]'>
-                    <a class="link" routerLink="/admin" routerLinkActive='active'>Admin Panel</a>
+                    <a class="link" routerLink="/admin" routerLinkActive='active'>Admin panel</a>
                 </li>
                 <li class="item">
                     <a class="link" href="#contact">Contact</a>
@@ -41,7 +41,7 @@
                     <li>
                         <a>Welcome {{user.firstName | titlecase}}</a>
                         <ul>
-                            <li><a routerLink="/member/edit">Edit Profile</a></li>
+                            <li><a routerLink="/member/edit" *appHasRole='["Member","Personel"]'>Edit Profile</a></li>
                             <hr>
                             <li><a (click)="logout()">Logout</a></li>
                         </ul>
