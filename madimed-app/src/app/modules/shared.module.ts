@@ -10,7 +10,6 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
-// import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';  
 
 @NgModule({
   declarations: [],

@@ -1,53 +1,41 @@
 <div class="cont">
     <div class="infos">
-        <tabset class="history-tabset">
-            <tab heading="List of all visits">
-                <div *ngIf="!visits || visits.length === 0">
-                    <h2>No visits</h2>
+        <h2>List of all visits</h2>
+        <div *ngIf="!visits || visits.length === 0">
+            <h2>No visits</h2>
+        </div>
+        <div *ngIf="visits?.length > 0">
+            <div class="list-detail">
+                <div class="list-header">
+                    <h6 style="width: 90px">Number</h6>
+                    <h6>Visit date</h6>
+                    <h6>Doctor name</h6>
+                    <h6 style="width: 125px">Time of visit</h6>
+                    <h6>Form</h6>
+                    <h6 style="margin: auto; text-align: center">Comments</h6>
+                    <h6 style="text-align: center">Visit made</h6>
                 </div>
-                <div *ngIf="visits?.length > 0">
-                    <div class="list-detail">
-                        <div class="list-header">
-                            <h6 style="width: 90px">Number</h6>
-                            <h6>Visit date</h6>
-                            <h6>Doctor name</h6>
-                            <h6 style="width: 125px">Time of visit</h6>
-                            <h6>Form</h6>
-                            <h6 style="margin: auto; text-align: center">Comments</h6>
-                            <h6 style="text-align: center">Visit made</h6>
-                        </div>
-                        <div class="details" *ngIf="container === 'Outbox'">
-                            <div class="visit-details" *ngFor="let visit of visits; let i = index">
-                                <p style="width: 80px">{{i+1}}</p>
-                                <p>{{visit.date | date:'dd MMMM yyyy'}}</p>
-                                <p>dr {{visit.doctorFirstName}} {{visit.doctorLastName}}</p>
-                                <p style="width: 125px">{{visit.time | date:'hh:mm'}}</p>
-                                <p>{{visit.form}}</p>
-                                <p style="margin: auto; margin-left:0; text-align: left">{{visit.comments}}</p>
-                                <p style="text-align: center" *ngIf="!visit.dateRead">No</p>
-                                <p style="text-align: center" *ngIf="visit.dateRead">Yes</p>
-                                <hr>
-                            </div>  
-                        </div>
+                <div class="details" *ngIf="container === 'Outbox'">
+                    <div class="visit-details" *ngFor="let visit of visits; let i = index">
+                        <p style="width: 80px">{{i+1}}</p>
+                        <p>{{visit.date | date:'dd MMMM yyyy'}}</p>
+                        <p>dr {{visit.doctorFirstName}} {{visit.doctorLastName}}</p>
+                        <p style="width: 125px">{{visit.time | date:'hh:mm'}}</p>
+                        <p>{{visit.form}}</p>
+                        <p style="margin: auto; margin-left:0; text-align: left">{{visit.comments}}</p>
+                        <p style="text-align: center" *ngIf="!visit.dateRead">No</p>
+                        <p style="text-align: center" *ngIf="visit.dateRead">Yes</p>
+                        <hr>
                     </div>
                 </div>
-                <div class="pagin-class" *ngIf="pagination && visits?.length > 0">
-                    <pagination 
-                    [boundaryLinks]="true" 
-                    [totalItems]="pagination.totalItems"
-                    [itemsPerPage]="pagination.itemsPerPage"
-                    [maxSize]="10"
-                    [(ngModel)]="pagination.currentPage"
-                    (pageChanged)="pageChanged($event)"
-                    previousText="&lsaquo;" 
-                    nextText="&rsaquo;" 
-                    firstText="&laquo;" 
-                    lastText="&raquo;">
-                    </pagination>
-                </div>
-            </tab>
-            <tab heading="Visits made">
-                <h2>Visits made</h2>
-            </tab>
-        </tabset>
+            </div>
+        </div>
+        <div class="pagin-class" *ngIf="pagination && visits?.length > 0">
+            <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems"
+                [itemsPerPage]="pagination.itemsPerPage" [maxSize]="10" [(ngModel)]="pagination.currentPage"
+                (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                lastText="&raquo;">
+            </pagination>
+        </div>
     </div>
+</div>

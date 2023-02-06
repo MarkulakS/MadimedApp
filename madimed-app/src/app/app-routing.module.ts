@@ -11,6 +11,7 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
+import { PersonelGuard } from './guards/personel.guard';
 import { PreventUnsavedChangesGuard } from './guards/prevent-unsaved-changes.guard';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
@@ -24,8 +25,8 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
-      {path: 'members', component: MemberListComponent },
-      {path: 'members/:pesel', component: MemberCardComponent, resolve: {member: MemberDetailedResolver} },
+      {path: 'members', component: MemberListComponent, canActivate: [PersonelGuard] },
+      {path: 'members/:pesel', component: MemberCardComponent, resolve: {member: MemberDetailedResolver}, canActivate: [PersonelGuard]  },
       {path: 'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard] },
       {path: 'visits-list', component: VisitsListComponent },
       {path: 'visits', component: VisitsComponent },

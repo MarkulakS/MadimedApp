@@ -57,16 +57,10 @@ namespace API.Data
 
         public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
         {
-            // var query = _context.Users
-            //     .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-            //     .AsNoTracking();
-
             var query = _context.Users
                 .Include(a => a.Address)
                 .AsQueryable();
             
-            // OrderByDescending -> sortuje odwrotnie
-
             query = userParams.OrderBy switch {
                 "pesel" => query.OrderByDescending( u => u.Pesel),
                 _ => query.OrderBy( u => u.Id)
@@ -75,14 +69,11 @@ namespace API.Data
             //pokazuje wszystkich oprocz aktualnie zalogowanego 
             query = query.Where(u => u.Pesel != userParams.CurrentPesel);
 
-
             return await PagedList<MemberDto>.CreateAsync(
                 query.AsNoTracking().ProjectTo<MemberDto>(_mapper.ConfigurationProvider),
                 userParams.PageNumber, 
                 userParams.PageSize);
         }
-
-        
 
         public async Task<MemberDto> GetMemberAsync(string pesel)
         {
@@ -92,5 +83,6 @@ namespace API.Data
                 .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();
         }
+
     }
 }

@@ -1,5 +1,5 @@
 import { getLocaleDateFormat } from '@angular/common';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { Member } from 'src/app/models/members';
@@ -19,19 +19,21 @@ export class MemberCardComponent implements OnInit {
 @ViewChild('memberTabs') memberTabs: TabsetComponent;
 activeTab: TabDirective;
 @Input() member: Member = {} as Member;
+// @Output() memberList: Member = {} as Member;
 visits: Visit[] = [];
 @ViewChild('memberVisit') memberVisit: MemberVisitsComponent;
-// pagination?: Pagination;
-container = 'Inbox';
+pagination?: Pagination;
+@Output() container: 'NotDone';
 pageNumber = 1;
 pageSize = 7;
 
   constructor(private memberService: MembersService, private route: ActivatedRoute, private visitService: VisitService) { }
 
   ngOnInit(): void {
-    // this.route.data.subscribe({
-    //   next: data => this.member = data['member']
-    // })
+    this.route.data.subscribe({
+      next: data => this.member = data['member']
+    })
+    // this.memberList = this.member;
     this.loadMember();
   }
 
@@ -44,7 +46,9 @@ pageSize = 7;
   loadVisits(): void {
     if(this.member){
       this.visitService.getVisitThread(this.member.pesel).subscribe({
-        next: visit => this.visits = visit
+        next: visit => {this.visits = visit
+        console.log("Visit: "+visit[0].dateRead);}
+
       })
     }
   }
@@ -52,6 +56,8 @@ pageSize = 7;
   onTabActivated(data: TabDirective) {
     this.activeTab = data;
     if(this.activeTab.heading === 'Scheduled visits') {
+      this.loadVisits();
+    }else if(this.activeTab.heading === 'History') {
       this.loadVisits();
     }
   }

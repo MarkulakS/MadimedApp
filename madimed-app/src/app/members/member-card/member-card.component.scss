@@ -31,3 +31,61 @@
         }
     }
 }
+
+.list-detail {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    padding-bottom: 20px;
+    box-shadow: 0 0 0.5em;
+}
+
+.list-header {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    margin: auto;
+    margin-bottom: -10px;
+    margin-left: 10px;
+    h6 {
+        width: 200px;
+        font-weight: 600;
+    }
+}
+
+.details {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    margin-top: 10px;
+        p {
+            width: 200px;
+            margin-bottom: 0;
+        }
+        .visit-details {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            margin: auto;
+            padding-left: 20px;
+            margin-top: 10px;
+            border-bottom: 1px solid lightgray;
+        }
+}
+
+.pagin-class {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin: 25px auto;
+}

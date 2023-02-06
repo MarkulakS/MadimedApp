@@ -19,10 +19,10 @@
                 <h4>Email: <span>{{member.email}}</span></h4>
             </tab>
             <tab heading="Scheduled visits" (selectTab)="onTabActivated($event)">
-                <app-member-visits #memberVisit *ngIf="member" [visits]="visits" [pesel]="member.pesel" [pagination]="pagination"></app-member-visits>
+                <app-member-visits #memberVisit *ngIf="member" [visits]="visits" [container]="'NotDone'" [pesel]="member.pesel" [pagination]="pagination"></app-member-visits>
             </tab>
             <tab heading="History" (selectTab)="onTabActivated($event)">
-                <h2>History</h2>
+                <app-member-visits #memberVisit *ngIf="member" [visits]="visits" [container]="'Outbox'" [pesel]="member.pesel" [pagination]="pagination"></app-member-visits>
             </tab>
         </tabset>
     </div>

@@ -20,8 +20,8 @@ export class VisitService {
     return getPaginatedResult<Visit[]>(this.baseUrl + 'visits', params, this.http);
   }
 
-  getTimeVisitsFromDay(date: Date) {
-    return this.http.get<Date[]>(this.baseUrl + 'visits/date/' + date);
+  getTimeVisitsFromDate(pesel: string, date: Date) {
+    return this.http.get<Date[]>(this.baseUrl + 'visits/date/' + pesel + '/' + date);
   }
 
   getVisitThread(pesel: string) {
@@ -34,5 +34,9 @@ export class VisitService {
 
   deleteVisit(id: number) {
     return this.http.delete(this.baseUrl + 'visits/delete-visit/' + id);
+  }
+
+  makeVisitMade(visitId: number) {
+    return this.http.post(this.baseUrl + 'visits/make-read/' + visitId, visitId);
   }
 }

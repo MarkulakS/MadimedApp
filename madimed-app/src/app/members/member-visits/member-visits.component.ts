@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
+import { Member } from 'src/app/models/members';
 import { Pagination } from 'src/app/models/pagination';
 import { Visit } from 'src/app/models/visit';
 import { VisitService } from 'src/app/services/visit.service';
@@ -11,15 +12,15 @@ import { VisitService } from 'src/app/services/visit.service';
 export class MemberVisitsComponent implements OnInit {
   @Input() pesel?: string;
   @Input() visits: Visit[] = [];
+  @Input() member: Member = {} as Member;
   @Output() pagination?: Pagination;
-  container = 'NotDone';
+  @Input() container: string;
 
   constructor(private visitService: VisitService) { }
 
   ngOnInit(): void {
     console.log(this.pagination);
+    console.log("container: "+this.container);
   }
-
-
 
 }

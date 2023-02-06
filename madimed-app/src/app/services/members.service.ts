@@ -37,6 +37,10 @@ export class MembersService {
     return this.userParams;
   }
 
+  getUser() {
+    return this.user;
+  }
+
   setUserParams(params: UserParams) {
     this.userParams = params;
   }

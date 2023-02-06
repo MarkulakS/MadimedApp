@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, AbstractControl } from '@angular/forms';
 import { Member } from 'src/app/models/members';
 import { Visit } from 'src/app/models/visit';
 import { MembersService } from 'src/app/services/members.service';
@@ -16,38 +16,75 @@ export class VisitsComponent implements OnInit {
   visits: Visit[] = [];
   selectedPersonelId: number;
   selectedPersonel: Member;
+  doctorPesel: string;
   dateVisit: Date = new Date();
   comments: string;
-  timeVisit: any;
+  timeVisit: Date = new Date();
   disableTime: Date[] = [];
+  mstep = 20;
+  minTime: Date = new Date();
+  maxTime: Date = new Date();
+  startTime: Date = new Date();
+  valid = true;
+  dataAvailable = true;
+  doctorValid = false;
+  timeValid = false;
 
-  constructor(private memberService: MembersService, private visitService: VisitService) { }
+  constructor(private memberService: MembersService, private visitService: VisitService) {
+  }
 
   ngOnInit(): void {
+    this.minTime.setHours(8);
+    this.minTime.setMinutes(55);
+    this.maxTime.setHours(18);
+    this.maxTime.setMinutes(40);
+    this.startTime.setHours(9);
+    this.startTime.setMinutes(0);
+    this.timeVisit.setHours(9);
+    this.timeVisit.setMinutes(0);
+    this.timeVisit.setSeconds(0);
+
     this.disableDaysBefore();
     this.getPersonel();    
     this.selectedPersonel = this.personel.find(p => p.id === this.selectedPersonelId);
   }
 
-  //TUTAJ
+  isValid(event: boolean): void {
+    this.valid = event; 
+  }
+
+  checkTime(time: Date) {
+    let selectedTime = new Date(this.dateVisit);
+    selectedTime.setHours(time.getHours());
+    selectedTime.setMinutes(time.getMinutes());
+    selectedTime.setSeconds(0, 0);
+  
+    for (let disabledTime of this.disableTime) {
+      let disabledTimeAdjusted = new Date(disabledTime.getTime());
+      disabledTimeAdjusted.setSeconds(0, 0);
+  
+      if (selectedTime.getTime() === disabledTimeAdjusted.getTime()) {
+        this.dataAvailable = false;
+        return false;
+      }
+    }
+    this.dataAvailable = true;
+    return true;
+  }
+
   checkAvailableTimeVisit(timeSpan: Date) {
-    this.visitService.getTimeVisitsFromDay(timeSpan).subscribe({
+    this.visitService.getTimeVisitsFromDate(this.doctorPesel, timeSpan).subscribe({
       next: time => {
         if(time != null) {
-          for(let i=0; i<time.length;i++){
+          for(let i=0; i < time.length; i++){
             this.disableTime[i] = new Date(time[i]);
-            console.log(this.disableTime[i].toLocaleTimeString());
-
-            if(this.disableTime[i].toLocaleTimeString() === this.timeVisit.toLocaleTimeString()) {
-              //Tutaj możesz dodać jakieś komunikaty lub inne akcje żeby zablokować wybraną godzinę
-              
-            }
           }
         }
+        this.checkTime(this.startTime);
       }
     })
+    this.timeValid = true;
   }
-  //TUTAJ
 
   getPersonel() {
     this.memberService.getPersonel().subscribe({
@@ -59,6 +96,10 @@ export class VisitsComponent implements OnInit {
 
   updateSelectedPersonel() {
     this.selectedPersonel = this.personel.find(p => p.id === this.selectedPersonelId);
+    var e = (document.getElementById("doctors")) as HTMLSelectElement;
+    this.doctorPesel = e.options[e.selectedIndex].value;
+    this.doctorValid = true;
+    if(!this.dataAvailable) this.checkAvailableTimeVisit(this.dateVisit);
   }
   
   disableDaysBefore() {
@@ -66,7 +107,7 @@ export class VisitsComponent implements OnInit {
     document.getElementsByName("dateVisit")[0].setAttribute('min', today);
   }
 
-  getTime(dateVisit: Date) {
+  getTimeVisit(dateVisit: Date) {
     let hours = this.timeVisit.getHours();
     let minutes = this.timeVisit.getMinutes();
 
@@ -77,21 +118,18 @@ export class VisitsComponent implements OnInit {
   }
 
   onSubmit() {
-    var e = (document.getElementById("doctors")) as HTMLSelectElement;
-    var doctorPesel = e.options[e.selectedIndex].value;
-
     var m = (document.getElementById("visits")) as HTMLSelectElement;
     var form = m.options[m.selectedIndex].text;
 
     //register on visit
-    // this.visitService.addVisit(doctorPesel, this.dateVisit, this.getTime(this.dateVisit), form, this.comments).subscribe({
-    //   next: visit => 
-    //   {
-    //     this.visits.push(visit);
-    //     this.visitForm.reset();
-    //   },error: error => {
-    //     console.log(error);
-    //   }
-    // })
+    this.visitService.addVisit(this.doctorPesel, this.dateVisit, this.getTimeVisit(this.dateVisit), form, this.comments).subscribe({
+      next: visit => 
+      {
+        this.visits.push(visit);
+        location.reload();
+      },error: error => {
+        console.log(error);
+      }
+    })
   }
 }

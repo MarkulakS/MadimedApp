@@ -8,7 +8,7 @@ import { AccountService } from '../services/account.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements CanActivate {
+export class PersonelGuard implements CanActivate {
 
   constructor(private accountService: AccountService, private toastr: ToastrService, private route: Router) {}
 
@@ -18,7 +18,7 @@ export class AdminGuard implements CanActivate {
       return this.accountService.currentUser$.pipe(
         map(user => {
           if(!user) return false;
-          if(user.roles.includes('Admin')) {
+          if(user.roles.includes('Personel') || user.roles.includes('Admin')) {
             return true;
           }else{
             this.toastr.error("You cannot enter this area!");
@@ -27,6 +27,6 @@ export class AdminGuard implements CanActivate {
           }
         })
       )
-    }
+  }
   
 }

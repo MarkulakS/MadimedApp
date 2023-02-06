@@ -33,19 +33,14 @@ namespace API.Data
             _context.Visits.Remove(visit);
         }
 
+        public void UpdateVisit(Visit visit)
+        {
+            _context.Entry(visit).State = EntityState.Modified;
+        }
+
         public async Task<Visit> GetVisit(int id)
         {
             return await _context.Visits.FindAsync(id);
-        }
-
-        public async Task<IEnumerable<DateTime>> GetVisitsFromDate(DateTime date)
-        {
-            var visits = await _context.Visits
-                .Where(x => x.Date == date)
-                .Select(x => x.Time)
-                .ToListAsync();
-
-            return visits;
         }
 
         public async Task<PagedList<VisitDto>> GetVisitsForUser(VisitParams visitParams)
@@ -67,6 +62,20 @@ namespace API.Data
             return await PagedList<VisitDto>.CreateAsync(visits, visitParams.PageNumber, visitParams.PageSize);
         }
 
+        
+        public async Task<IEnumerable<DateTime>> GetVisitsFromDate(DateTime date, string pesel)
+        {
+            var doctorVisits = await _context.Visits
+                .Where(p => p.DoctorPesel == pesel)
+                .ToListAsync();
+
+            var visits = doctorVisits
+                .Where(x => x.Date == date)
+                .Select(x => x.Time);
+
+            return visits;
+        }
+
         public async Task<IEnumerable<VisitDto>> GetVisitThread(string currentUserPesel, string doctorPesel)
         {
             var visits = await _context.Visits
@@ -78,37 +87,8 @@ namespace API.Data
                     m.SenderPesel == currentUserPesel
                 )
                 .OrderBy(m => m.Date)
+                .ThenBy(t => t.Time)
                 .ToListAsync();
-
-            return _mapper.Map<IEnumerable<VisitDto>>(visits);
-        }
-
-        public async Task<IEnumerable<VisitDto>> MakeVisitDone(string currentUserPesel, string doctorPesel)
-        {
-            var visits = await _context.Visits
-                .Include(u => u.Sender)
-                .Where(
-                    m => m.DoctorPesel == currentUserPesel &&
-                    m.SenderPesel == doctorPesel ||
-                    m.DoctorPesel == doctorPesel && 
-                    m.SenderPesel == currentUserPesel
-                )
-                .OrderBy(m => m.Date)
-                .ToListAsync();
-
-        //nadanie daty odczytania wizyty gdy sie obejrzy wszystkie
-
-            var notDoneVisits = visits.Where(m => m.DateRead == null
-                && m.DoctorPesel == currentUserPesel).ToList();
-
-            if(notDoneVisits.Any())
-            {
-                foreach(var visit in notDoneVisits)
-                {
-                    visit.DateRead = DateTime.UtcNow;
-                }
-                await _context.SaveChangesAsync();
-            }
 
             return _mapper.Map<IEnumerable<VisitDto>>(visits);
         }

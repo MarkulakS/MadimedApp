@@ -94,14 +94,41 @@ namespace API.Controllers
             return Ok(await _visitRepository.GetVisitThread(currentUserPesel, pesel));
         }
 
-        [HttpGet("date/{date}")]
-        public async Task<ActionResult> GetVisitsFromDate(DateTime date) 
+        [HttpGet("date/{pesel}/{date}")]
+        public async Task<ActionResult> GetVisitsFromDate(DateTime date, string pesel) 
         {
-            var visits = await _visitRepository.GetVisitsFromDate(date);
+            var visits = await _visitRepository.GetVisitsFromDate(date, pesel);
 
-            if(visits == null) return Ok("Theres no visits in that day");
+            if(visits == null) return NotFound("Theres no visits in that day");
 
             return Ok(visits);
+        }
+
+        [HttpPost("make-read/{visitId}")]
+        public async Task<ActionResult> MakeVisitRead(int visitId)
+        {
+            var visit = await _visitRepository.GetVisit(visitId);
+            var doctorPesel = User.GetPesel();
+            if(visit.SenderPesel == doctorPesel) return BadRequest();
+
+            var visits = await _visitRepository.GetVisitThread(visit.SenderPesel, doctorPesel);
+
+            var notDoneVisits = visits.Where(m => m.DateRead == null && m.DoctorPesel == doctorPesel).ToList();
+                        
+            if(notDoneVisits.Any())
+            {
+                foreach(var ndVisit in notDoneVisits)
+                {
+                    if(ndVisit.Id == visit.Id)
+                    {
+                        visit.DateRead = DateTime.UtcNow;
+                        _visitRepository.UpdateVisit(visit);
+                    }
+                }
+            }
+
+            if(await _visitRepository.SaveAllAsync()) return Ok();
+            return BadRequest("Something went wrong saving changes");
         }
     }
 }

@@ -34,14 +34,12 @@ export class MemberEditComponent implements OnInit {
   ngOnInit(): void {
     this.loadMember();
     this.date = this.member.dateOfBirth.toLocaleDateString();
-    console.log("date: "+this.date);
   }
 
   loadMember() {
     this.memberService.getMember(this.user.pesel).subscribe(member => {
       this.member = member;
     })
-
   }
 
   cancel() {

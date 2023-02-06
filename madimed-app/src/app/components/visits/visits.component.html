@@ -15,17 +15,32 @@
                 <div class="form-inputs">
                     <label>Doctors</label>
                      <select [(ngModel)]="selectedPersonelId" (ngModelChange)="updateSelectedPersonel()" name="doctors" id="doctors" required>
-                        <option value="" selected disabled hidden >Select your option</option>
+                        <option value="Select" selected disabled hidden >Select your option</option>
                         <option *ngFor="let person of personel" [value]="person.pesel">dr. {{person.firstName}} {{person.lastName}}</option>
                     </select>                 
                 </div>
                 <div class="form-inputs">
                     <label>Date of visit</label>
-                    <input type="date" name="dateVisit" min="0" [(ngModel)]="dateVisit" (ngModelChange)="checkAvailableTimeVisit(dateVisit)" required>
+                    <input [disabled]="!doctorValid" type="date" name="dateVisit" min="0" [(ngModel)]="dateVisit" (ngModelChange)="checkAvailableTimeVisit(dateVisit)" required>
                 </div>
                 <div class="form-inputs">
                     <label>Time of visit</label>
-                    <timepicker [(ngModel)]="timeVisit" name="timeVisit" [showMeridian]="false" required>{{timeVisit | date:"hh:mm"}}</timepicker>
+                    <timepicker 
+                        name="timeVisit" 
+                        [(ngModel)]="timeVisit" 
+                        [minuteStep]="mstep"
+                        [min]="minTime" 
+                        [max]="maxTime"
+                        [showMeridian]="false" 
+                        (isValid)="isValid($event)"
+                        (ngModelChange)="checkTime(timeVisit)"
+                        [disabled]="!timeValid"
+                        required
+                        >
+                            {{timeVisit | date:"hh:mm"}}
+                    </timepicker>
+                    <div *ngIf="!valid" class="alert alert-danger">Invalid time</div>
+                    <div *ngIf="!dataAvailable" class="alert alert-danger">This time is already taken. Please choose another one.</div>
                 </div>
                 <div class="form-inputs">
                     <label>Form</label>

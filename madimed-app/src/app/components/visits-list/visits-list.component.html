@@ -14,7 +14,7 @@
                 <h6>Form</h6>
                 <h6 style="margin: auto; text-align: center">Comments</h6>
                 <h6 style="text-align: center">Status</h6>
-                <h6 *appHasRole='["Member"]' style="width: 130px"></h6>
+                <h6 style="width: 130px"></h6>
             </div>
             <div class="details" *appHasRole='["Member"]'>
                 <div class="visit-details" *ngFor="let visit of visits; let i = index">
@@ -36,8 +36,9 @@
                     <p>dr {{visit.senderFirstName}} {{visit.senderLastName}}</p>
                     <p style="width: 125px">{{visit.time | date:'hh:mm'}}</p>
                     <p>{{visit.form}}</p>
-                    <p style="margin: auto; margin-left: 0; width: 340px;">{{visit.comments}}</p>
+                    <p style="margin: auto; margin-left: 0; width: 210px;">{{visit.comments}}</p>
                     <p style="text-align: center">Scheduled</p>
+                    <button type="button" class="btn btn-info" style="margin-right: 25px" (click)="makeVisitMade(visit.id)">Make visit</button>
                     <hr>
                 </div>
             </div>

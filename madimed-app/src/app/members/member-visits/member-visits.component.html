@@ -5,7 +5,6 @@
     <div *ngIf="visits?.length > 0">
         <div class="list-detail">
             <div class="list-header">
-                <h6 style="width: 90px">Number</h6>
                 <h6>Visit date</h6>
                 <h6>Doctor name</h6>
                 <h6 style="width: 125px">Time of visit</h6>
@@ -13,22 +12,38 @@
                 <h6 style="margin: auto; text-align: center">Comments</h6>
                 <h6 style="text-align: center">Visit made</h6>
             </div>
-            <div class="details" *ngIf="container === 'NotDone'">
+            <div class="details" *ngIf="container === 'NotDone'"> 
                 <div class="visit-details" *ngFor="let visit of visits; let i = index">
-                    <p style="width: 80px">{{i+1}}</p>
-                    <p>{{visit.date | date:'dd MMMM yyyy'}}</p>
-                    <p>dr {{visit.doctorFirstName}} {{visit.doctorLastName}}</p>
-                    <p style="width: 125px">{{visit.time | date:'hh:mm'}}</p>
-                    <p>{{visit.form}}</p>
-                    <p style="margin: auto; margin-left:0; text-align: left">{{visit.comments}}</p>
-                    <p style="text-align: center" *ngIf="!visit.dateRead">No</p>
-                    <p style="text-align: center" *ngIf="visit.dateRead">Yes</p>
-                    <hr>
+                    <ng-container *ngIf="visits.length === 1 && !visits.dateRead">
+                        <p>No sheduled visits</p>
+                    </ng-container>
+                    <ng-container *ngIf="!visit.dateRead">
+                        <p>{{visit.date | date:'dd MMMM yyyy'}}</p>
+                        <p>dr {{visit.doctorFirstName}} {{visit.doctorLastName}}</p>
+                        <p style="width: 125px">{{visit.time | date:'hh:mm'}}</p>
+                        <p>{{visit.form}}</p>
+                        <p style="margin: auto; margin-left:0; text-align: left">{{visit.comments}}</p>
+                        <p style="text-align: center" *ngIf="!visit.dateRead">No</p>
+                        <p style="text-align: center" *ngIf="visit.dateRead">Yes</p>
+                        <hr *ngIf="!visit.dateRead">
+                    </ng-container>
+                </div>  
+            </div>
+            <div class="details" *ngIf="container === 'Outbox'"> 
+                <div class="visit-details" *ngFor="let visit of visits; let i = index">
+                        <p>{{visit.date | date:'dd MMMM yyyy'}}</p>
+                        <p>dr {{visit.doctorFirstName}} {{visit.doctorLastName}}</p>
+                        <p style="width: 125px">{{visit.time | date:'hh:mm'}}</p>
+                        <p>{{visit.form}}</p>
+                        <p style="margin: auto; margin-left:0; text-align: left">{{visit.comments}}</p>
+                        <p style="text-align: center" *ngIf="!visit.dateRead">No</p>
+                        <p style="text-align: center" *ngIf="visit.dateRead">Yes</p>
+                        <hr>
                 </div>  
             </div>
         </div>
     </div>
-    <div class="pagin-class" *ngIf=" pagination && visits?.length > 0">
+    <div class="pagin-class" *ngIf="pagination && visits?.length > 0">
         <pagination 
         [boundaryLinks]="true" 
         [totalItems]="pagination.totalItems"
