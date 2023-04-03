@@ -1,5 +1,4 @@
 # MadimedApp pl
-<h4>Język: PL</h4>
 <h4>Language: <a href="#en">EN</a></h4>
 
 <h2>Opis</h2>
@@ -35,9 +34,10 @@ dokumentację.</p>
 
 <h2>Kontakt</h2>
 <p>Email: <a href="mailto:markulaks17@gmail.com">markulaks17@gmail.com</a></p>
+</br></br>
 
-# MadimedApp en
-<h2 id="en">Description</h2>
+<h1 id="en"> MadimedApp en</h1>
+<h2>Description</h2>
 <p>This website is my final project for studies (engineering work).</p>
 <p>A web application for medical clinics. It aims to reduce the queues for registration and decrease the waiting time for
 the appropriate specialist. It should also simplify the registration process for patients and
