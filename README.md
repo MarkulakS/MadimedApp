@@ -2,24 +2,24 @@
 <h4>Language: <a href="#en">EN</a></h4>
 
 <h2>Opis</h2>
-<p>Ta aplikacja została napisana w formie pracy dyplomowej (praca inżynierska).</p>
+<p>Ta aplikacja została napisana jako praca dyplomowa (praca inżynierska).</p>
 <p>Aplikacja internetowa przeznaczona dla przychodni lekarskich. Ma ona pomóc w zmniejszeniu kolejek do
 rejestracji oraz zmniejszyć czas oczekiwania do odpowiedniego specjalisty. Powinna ułatwić
 pacjentom sam proces rejestracji oraz zmniejszyć obciążenie pracy recepcji przychodni.
 Aplikacja jest w pełni darmowa i umożliwia pacjentom łatwe zarejestrowanie się online na
-wizytę. Została stworzona przy użyciu technologii Angular, .NET Core oraz bazy SQLite.
+wizytę. Została stworzona przy użyciu technologii <b>Angular</b>, <b>.NET Core</b> oraz bazy <b>SQLite</b>.
 W aplikacji zostały zaimplementowane takie funkcjonalności jak możliwość wyboru lekarza
 i terminu wizyty, a także możliwość anulowania wizyty przez pacjentów. Lekarze z kolei
 będą mieć możliwość przeglądanie historii wizyt pacjenta i na bieżąco uzupełniać ich
 dokumentację.</p>
 
 <p>Strona klienta napisana w Angularze w języku TypeScript. Dzięki użyciu arkuszy stylów CSS/SCSS wygląd, przejrzystość i użyteczność strony jest przyjemna i łatwa w obsłudze.</p>
-<p>Api napisane w języku C# z użyciem .NET Core. Baza danych SQLite
+<p>Api napisane w języku C# z użyciem .NET Core. Baza danych SQLite.
 </br>Dodatkowo na potrzeby aplikacji zostały użyte dodatki takie jak: 
   <ul>
-    <li>Entity Framework pomocne przy zarządzaniu danymi oraz łatwym mapowaniu
+    <li><b>Entity Framework</b> pomocne przy zarządzaniu danymi oraz łatwym mapowaniu
       obiektów aplikacji na tabele bazy danych,</li>
-    <li>system logowania AspNet IdentityRole zapewniający bezpieczeństwo danych
+    <li>system logowania <b>AspNet IdentityRole</b> zapewniający bezpieczeństwo danych
       pacjentów.</li>
   </ul>
 </p>
