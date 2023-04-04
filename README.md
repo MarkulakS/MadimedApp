@@ -25,7 +25,7 @@ dokumentację.</p>
 </p>
 
 <h2>Licencja</h2>
-<p>Ten projekt jest objęty licencją "przeglądową", co oznacza, że zachowuję pełne prawa autorskie do kodu, ale jednocześnie pozwalając na jego przeglądanie i korzystanie przez innych. Więcej informacji na temat licencji znajdziesz w pliku UNLICENSE.md.</p>
+<p>Ten projekt jest objęty licencją "przeglądową", co oznacza, że zachowuję pełne prawa autorskie do kodu, ale jednocześnie pozwalając na jego przeglądanie i korzystanie przez innych. Więcej informacji na temat licencji znajdziesz w pliku LICENSE.md.</p>
 
 <h2>Autorzy</h2>
 <p>
@@ -58,7 +58,7 @@ update their documentation.</p>
 </p>
 
 <h2>License</h2>
-<p>This project is licensed under a "permissive" license, which means that I retain full copyright ownership of the code, while allowing others to view and use it. For more information about the license, please refer to the UNLICENSE.md file.</p>
+<p>This project is licensed under a "permissive" license, which means that I retain full copyright ownership of the code, while allowing others to view and use it. For more information about the license, please refer to the LICENSE.md file.</p>
 
 <h2>Authors</h2>
 <p>
