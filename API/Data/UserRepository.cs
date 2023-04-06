@@ -47,7 +47,12 @@ namespace API.Data
 
         public void DeleteUser(AppUser user)
         {
-            _context.Entry(user).State = EntityState.Deleted;
+            // _context.Entry(user).State = EntityState.Deleted;
+        }
+
+        public void UpdateAddress(UserAddress address)
+        {
+            _context.Update(address);
         }
 
         public void Update(AppUser user)

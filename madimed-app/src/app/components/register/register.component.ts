@@ -58,7 +58,9 @@ export class RegisterComponent implements OnInit {
     const plainAddress = Object.assign({}, address);
     const addressArray = [plainAddress];
     this.accountService.register({...this.registerForm.value, address: addressArray}).subscribe(response => {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/').then(() => {
+        location.reload();
+      })
     }, error => {
       this.validationsErrors = error;
       console.log(error);

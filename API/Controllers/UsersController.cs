@@ -54,11 +54,20 @@ namespace API.Controllers
         [HttpPut("{pesel}")]
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto) {
-            var pesel = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var pesel = User.FindFirst(ClaimTypes.Name)?.Value;
             var user = await _userRepository.GetUserByPeselAsync(pesel);
 
             // zastępuje:
             // user.City = memberUpdateDto.City;    ... itd.
+            Console.WriteLine("##########################################");
+            Console.WriteLine("Psele: "+pesel);
+            Console.WriteLine("Memberup: "+memberUpdateDto);
+            Console.WriteLine("User: "+user);
+
+            foreach (var address in user.Address)
+            {
+                _userRepository.UpdateAddress(address);
+            }
             _mapper.Map(memberUpdateDto, user);
             _userRepository.Update(user);
 

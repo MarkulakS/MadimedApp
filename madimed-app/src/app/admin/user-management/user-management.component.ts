@@ -36,8 +36,9 @@ export class UserManagementComponent implements OnInit {
   }
   
   getUsersByPesel() {
-    this.adminService.getUsersWithRolesByPesel(this.pesel).subscribe({
-      next: user => this.users = user
+    this.adminService.getUsersWithRolesByPesel(this.pesel).subscribe((user) => {
+      this.users = user
+      console.log(user);
     })
   }
 

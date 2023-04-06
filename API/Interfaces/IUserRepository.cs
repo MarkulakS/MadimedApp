@@ -12,6 +12,7 @@ namespace API.Interfaces
     {
         void Update(AppUser user);
         void DeleteUser(AppUser user);
+        void UpdateAddress(UserAddress address);
         Task<bool> SaveAllAsync();
         Task<IEnumerable<AppUser>> GetUsersAsync();
         Task<AppUser> GetUserByIdAsync(int id);
