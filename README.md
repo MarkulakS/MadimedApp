@@ -23,6 +23,7 @@ dokumentację.</p>
       pacjentów.</li>
   </ul>
 </p>
+<a href="#pres">Graficzna prezentacja aplikacji.</a>
 
 <h2>Licencja</h2>
 <p>Ten projekt jest objęty licencją "przeglądową", co oznacza, że zachowuję pełne prawa autorskie do kodu, ale jednocześnie pozwalając na jego przeglądanie i korzystanie przez innych. Więcej informacji na temat licencji znajdziesz w pliku LICENSE.md.</p>
@@ -56,7 +57,8 @@ update their documentation.</p>
     <li>AspNet IdentityRole login system, which ensures patient data security.</li>
   </ul>
 </p>
-
+<a href="#pres">Graphical presentation of the app.</a>
+ 
 <h2>License</h2>
 <p>This project is licensed under a "permissive" license, which means that I retain full copyright ownership of the code, while allowing others to view and use it. For more information about the license, please refer to the LICENSE.md file.</p>
 
@@ -67,8 +69,19 @@ update their documentation.</p>
 
 <h2>Contact</h2>
 <p>Email: <a href="mailto:markulaks17@gmail.com">markulaks17@gmail.com</a></p>
+</br>
 
+<h1 id="pres">Graficzna prezentacja aplikacji </br>(Graphical presentation of the application)</h1>
+</br>
+<p>Panel rejestracyjny (registration panel)</p>
 <img src='/README-assets/MadimedApp_Rejestracja.gif'>
+</br>
+<p>Panel pacjenta (patient panel)</p>
 <img src='/README-assets/MadimedApp_Pacjent.gif'>
+</br>
+<p>Panel lekarza (doctor panel)</p>
 <img src='/README-assets/MadimedApp_Lekarz.gif'>
+</br>
+<p>Panel administratora (admin panel)</p>
 <img src='/README-assets/MadimedApp_Admin.gif'>
+
