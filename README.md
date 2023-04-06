@@ -68,3 +68,7 @@ update their documentation.</p>
 <h2>Contact</h2>
 <p>Email: <a href="mailto:markulaks17@gmail.com">markulaks17@gmail.com</a></p>
 
+<img src='/README-assets/MadimedApp_Rejestracja.gif'>
+<img src='/README-assets/MadimedApp_Pacjent.gif'>
+<img src='/README-assets/MadimedApp_Lekarz.gif'>
+<img src='/README-assets/MadimedApp_Admin.gif'>
