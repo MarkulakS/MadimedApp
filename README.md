@@ -25,6 +25,25 @@ dokumentację.</p>
 </p>
 <a href="#pres">Graficzna prezentacja aplikacji.</a>
 
+## Narzędzia i technologie użyte w projekcie:
+- Visual Studio Code (środowisko)
+<p>Front-End</p>
+<ul> 
+  <li>Angular 12</li>
+  <li>TypeScript 4</li>
+  <li>HTML 5</li>
+  <li>SCSS</li>
+</ul>
+<p>Back-End</p>
+<ul>
+  <li>.NET 7</li>
+  <li>C#</li>
+  <li>EntityFrameworkCore 7</li>
+  <li>AspNetCore Identity EntityFrameworkCore 7</li>
+  <li>AspNetCore Authentication JwtBearer 7</li>
+  <li>AutoMapper 12</li>
+</ul>
+
 <h2>Licencja</h2>
 <p>Ten projekt jest objęty licencją "przeglądową", co oznacza, że zachowuję pełne prawa autorskie do kodu, ale jednocześnie pozwalając na jego przeglądanie i korzystanie przez innych. Więcej informacji na temat licencji znajdziesz w pliku LICENSE.md.</p>
 
@@ -58,6 +77,25 @@ update their documentation.</p>
   </ul>
 </p>
 <a href="#pres">Graphical presentation of the app.</a>
+
+## Tools & technologies used in the project:
+- Visual Studio Code (environment)
+<p>Front-End</p>
+<ul> 
+  <li>Angular 12</li>
+  <li>TypeScript 4</li>
+  <li>HTML 5</li>
+  <li>SCSS</li>
+</ul>
+<p>Back-End</p>
+<ul>
+  <li>.NET 7</li>
+  <li>C#</li>
+  <li>EntityFrameworkCore 7</li>
+  <li>AspNetCore Identity EntityFrameworkCore 7</li>
+  <li>AspNetCore Authentication JwtBearer 7</li>
+  <li>AutoMapper 12</li>
+</ul>
  
 <h2>License</h2>
 <p>This project is licensed under a "permissive" license, which means that I retain full copyright ownership of the code, while allowing others to view and use it. For more information about the license, please refer to the LICENSE.md file.</p>
